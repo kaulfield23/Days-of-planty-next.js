@@ -13,8 +13,11 @@ export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
-export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout || ((page) => page);
 
-  return getLayout(<Component {...pageProps} />);
+export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  return (
+    <IndexLayout>
+      <Component {...pageProps} />
+    </IndexLayout>
+  );
 }

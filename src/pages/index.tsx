@@ -15,7 +15,3 @@ export default function Home() {
     </>
   );
 }
-
-Home.getLayout = function getLayout(page: ReactElement) {
-  return <IndexLayout>{page}</IndexLayout>;
-};
