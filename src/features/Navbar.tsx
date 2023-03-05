@@ -1,36 +1,46 @@
 import React from 'react';
-import {
-  AppBar,
-  Box,
-  IconButton,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-  Typography,
-} from '@mui/material';
+import { AppBar, MenuItem, Toolbar, Typography } from '@mui/material';
 import { navbarStyle } from './styles/headerStyles';
+import Link from 'next/link';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 
 const Navbar = () => {
   const navMenu = ['Home', 'Login'];
   return (
-    <AppBar position="sticky" sx={navbarStyle.appBarStyle} component="nav">
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={navbarStyle.logoStyle}>
-          Logo
-        </Typography>
+    <>
+      <AppBar
+        position="sticky"
+        sx={navbarStyle.appBarStyle}
+        component="nav"
+        elevation={0}
+      >
+        <Toolbar>
+          <Link href="/">
+            <LocalFloristIcon sx={{ mr: 1, fontSize: '2.5rem' }} />
+          </Link>
+          <Typography
+            variant="subtitle1"
+            component="div"
+            sx={navbarStyle.logoStyle}
+          >
+            Days of Planty
+          </Typography>
 
-        {navMenu.map((nav) => {
-          return (
-            <ListItem key={nav} disablePadding>
-              <ListItemButton sx={{ textAlign: 'end' }}>
-                <ListItemText primary={nav} />
-              </ListItemButton>
-            </ListItem>
-          );
-        })}
-      </Toolbar>
-    </AppBar>
+          {navMenu.map((nav) => {
+            return (
+              <MenuItem key={nav}>
+                <Link href={`/${nav.toLowerCase()}`}>
+                  <Typography textAlign="center" sx={navbarStyle.menuStyle}>
+                    {nav}
+                  </Typography>
+                </Link>
+              </MenuItem>
+            );
+          })}
+        </Toolbar>
+      </AppBar>
+      <h1>hello</h1>
+    </>
   );
 };
 
