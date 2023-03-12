@@ -1,45 +1,58 @@
-import React from 'react';
-import { AppBar, MenuItem, Toolbar, Typography } from '@mui/material';
-import { navbarStyle } from './styles/headerStyles';
-import Link from 'next/link';
+import React, { useState } from 'react';
+import { SpeedDial, SpeedDialAction } from '@mui/material';
+
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import LoginIcon from '@mui/icons-material/Login';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
-  const navMenu = ['Home', 'Login'];
+  const router = useRouter();
+  const onClickSwitchPage = (value: string) => {
+    router.push(value);
+  };
+
+  const actions = [
+    {
+      icon: <LoginIcon onClick={() => onClickSwitchPage('/login')} />,
+      name: 'Login',
+    },
+  ];
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <>
-      <AppBar
-        position="sticky"
-        sx={navbarStyle.appBarStyle}
-        component="nav"
-        elevation={0}
+      <SpeedDial
+        direction="down"
+        ariaLabel="Navbar"
+        sx={{
+          position: 'absolute',
+          top: 16,
+          right: 16,
+        }}
+        onClose={handleClose}
+        onOpen={handleOpen}
+        icon={<LocalFloristIcon />}
+        open={open}
+        FabProps={{
+          sx: {
+            bgcolor: 'primary.main',
+            '&:hover': {
+              bgcolor: 'primary.dark',
+            },
+          },
+        }}
       >
-        <Toolbar>
-          <Link href="/">
-            <LocalFloristIcon sx={{ mr: 1, fontSize: '2.5rem' }} />
-          </Link>
-          <Typography
-            variant="subtitle1"
-            component="div"
-            sx={navbarStyle.logoStyle}
-          >
-            Days of Planty
-          </Typography>
-
-          {navMenu.map((nav) => {
-            return (
-              <MenuItem key={nav}>
-                <Link href={`/${nav.toLowerCase()}`}>
-                  <Typography textAlign="center" sx={navbarStyle.menuStyle}>
-                    {nav}
-                  </Typography>
-                </Link>
-              </MenuItem>
-            );
-          })}
-        </Toolbar>
-      </AppBar>
-      <h1>hello</h1>
+        {actions.map((action) => (
+          <SpeedDialAction
+            key={action.name}
+            icon={action.icon}
+            tooltipTitle={action.name}
+            tooltipOpen
+            onClick={handleClose}
+          />
+        ))}
+      </SpeedDial>
     </>
   );
 };
