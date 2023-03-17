@@ -7,13 +7,10 @@ import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const router = useRouter();
-  const onClickSwitchPage = (value: string) => {
-    router.push(value);
-  };
 
   const actions = [
     {
-      icon: <LoginIcon onClick={() => onClickSwitchPage('/login')} />,
+      icon: <LoginIcon onClick={() => router.push('/login')} />,
       name: 'Login',
     },
   ];
@@ -42,6 +39,7 @@ const Navbar = () => {
             },
           },
         }}
+        onClick={() => router.push('/')}
       >
         {actions.map((action) => (
           <SpeedDialAction

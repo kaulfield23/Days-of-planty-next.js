@@ -1,7 +1,6 @@
 import Head from 'next/head';
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { indexStyle } from '@/features/styles/IndexStyles';
-import Image from 'next/image';
 
 export default function Home() {
   return (
@@ -12,7 +11,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Box sx={indexStyle.backgroundStyle}></Box>
+      <Box sx={indexStyle.backgroundStyle}>
+        <Box sx={indexStyle.titleBackground}>
+          <Box sx={indexStyle.desc}>
+            <Typography sx={indexStyle.title} variant="h2">
+              Days of Planty
+            </Typography>
+            <Typography sx={indexStyle.title} variant="h3">
+              Keep track of your plants
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
     </>
   );
 }
