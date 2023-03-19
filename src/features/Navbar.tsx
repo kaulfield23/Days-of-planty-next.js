@@ -29,7 +29,7 @@ const Navbar = () => {
         }}
         onClose={handleClose}
         onOpen={handleOpen}
-        icon={<LocalFloristIcon />}
+        icon={<LocalFloristIcon sx={{ color: 'white' }} />}
         open={open}
         FabProps={{
           sx: {
