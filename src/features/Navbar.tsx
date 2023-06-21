@@ -29,7 +29,12 @@ const Navbar = () => {
         }}
         onClose={handleClose}
         onOpen={handleOpen}
-        icon={<LocalFloristIcon sx={{ color: 'white' }} />}
+        icon={
+          <LocalFloristIcon
+            sx={{ color: 'white' }}
+            onClick={() => router.push('/')}
+          />
+        }
         open={open}
         FabProps={{
           sx: {
@@ -39,7 +44,7 @@ const Navbar = () => {
             },
           },
         }}
-        onClick={() => router.push('/')}
+        // onClick={() => router.push('/')}
       >
         {actions.map((action) => (
           <SpeedDialAction

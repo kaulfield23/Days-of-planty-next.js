@@ -3,7 +3,6 @@ import leaves from '../../img/leaves.png';
 
 export const indexStyle: Record<string, SxProps<Theme> | undefined> = {
   backgroundStyle: {
-    backgroundColor: '#fcfcec',
     width: '100vw',
     height: '100vh',
     backgroundImage: `url(${leaves.src})`,
