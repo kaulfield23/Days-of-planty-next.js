@@ -21,10 +21,10 @@ export default function Home() {
               Days of Planty
             </Typography>
             <Typography sx={indexStyle.text} variant="h5">
-              Keep track of your plants
+              Keep an eye on my plants to avoid killing them
             </Typography>
             <Typography sx={indexStyle.text} variant="h5">
-              Next.js, Typescript
+              Next.js, Typescript, MongoDB, MUI
             </Typography>
             <Typography sx={indexStyle.text} variant="h6">
               By.Haeju

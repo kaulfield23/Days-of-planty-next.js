@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { SpeedDial, SpeedDialAction } from '@mui/material';
 
-import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
-import LoginIcon from '@mui/icons-material/Login';
 import { useRouter } from 'next/router';
+import { Grass, LocalFlorist } from '@mui/icons-material';
 
 const Navbar = () => {
   const router = useRouter();
 
   const actions = [
     {
-      icon: <LoginIcon onClick={() => router.push('/login')} />,
-      name: 'Login',
+      icon: <Grass onClick={() => router.push('/plants')} />,
+      name: 'Plants',
     },
   ];
   const [open, setOpen] = useState(false);
@@ -30,7 +29,7 @@ const Navbar = () => {
         onClose={handleClose}
         onOpen={handleOpen}
         icon={
-          <LocalFloristIcon
+          <LocalFlorist
             sx={{ color: 'white' }}
             onClick={() => router.push('/')}
           />
