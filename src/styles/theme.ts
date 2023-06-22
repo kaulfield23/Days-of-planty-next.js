@@ -3,10 +3,7 @@ import { blue } from '@mui/material/colors';
 
 export const theme = createTheme({
   typography: {
-    subtitle1: {
-      fontSize: '1.5rem',
-      fontFamily: 'Rampart One',
-    },
+    fontFamily: 'Rajdhani',
   },
   palette: {
     primary: {
