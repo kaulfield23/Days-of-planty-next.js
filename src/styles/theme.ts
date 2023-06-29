@@ -1,5 +1,5 @@
 import { createTheme } from '@mui/material/styles';
-import { blue } from '@mui/material/colors';
+import { blue, green } from '@mui/material/colors';
 
 export const theme = createTheme({
   typography: {
@@ -12,6 +12,10 @@ export const theme = createTheme({
       dark: blue['A200'],
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    secondary: {
+      main: green['600'],
+      dark: green['800'],
     },
     // secondary: {
     //   light: '#0066ff',
