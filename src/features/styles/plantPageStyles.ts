@@ -16,4 +16,11 @@ export const plantPageStyle: Record<string, SxProps<Theme> | undefined> = {
     padding: { xs: '10px', md: '0' },
     borderRadius: '7px',
   },
+  header: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '400px',
+    backgroundColor: '#78b47d',
+  },
 };

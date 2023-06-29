@@ -12,12 +12,7 @@ const Plants = () => {
   console.log(ficus, ' ficus');
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        height="400px"
-      >
+      <Box sx={plantPageStyle.header}>
         <Box sx={plantPageStyle.titleBox}>
           <Typography variant="h1" sx={plantPageStyle.title}>
             Plants
@@ -29,7 +24,7 @@ const Plants = () => {
           </Box>
         </Box>
         <Box sx={plantPageStyle.bgPic}>
-          <Image src={plant} alt="ee" width={300} />
+          <Image src={plant} alt="my plants" width={300} />
         </Box>
       </Box>
       <Box
@@ -41,19 +36,19 @@ const Plants = () => {
         <PlantAvatar
           pic={ficus.src}
           review={'This is the best website to keep me sane'}
-          name={'Ficus elastica Tineke'}
+          name={'Rubber tree'}
           bgColor={'#b9e7a3'}
         />
         <PlantAvatar
           pic={blueStar.src}
           review={"I thought I wouldn't survive but I'm still alive"}
-          name={'Phlebodium aureum blue star'}
+          name={'Fern'}
           bgColor={'#d3cece'}
         />
         <PlantAvatar
           pic={cactus.src}
           review={"I'm lucky that I don't need so much care"}
-          name={'Mammillaria gracilis fragilis'}
+          name={'Cactus'}
           bgColor={'#fae790'}
         />
       </Box>
