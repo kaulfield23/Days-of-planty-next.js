@@ -5,7 +5,7 @@ import { plantPageStyle } from '../styles/plantPageStyles';
 const PlantTabs = () => {
   const [value, setValue] = useState(0);
 
-  const TabPanel = (props: any) => {
+  const TabPanel = (props) => {
     const { children, value, index, ...other } = props;
 
     return (
