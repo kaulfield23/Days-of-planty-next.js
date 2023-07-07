@@ -1,5 +1,5 @@
 import { SxProps, Theme } from '@mui/material';
-import leaves from '../../img/leaves.png';
+import leaves from '/public/static/img/leaves.png';
 
 export const indexStyle: Record<string, SxProps<Theme> | undefined> = {
   backgroundStyle: {

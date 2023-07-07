@@ -2,19 +2,20 @@ import { plantPageStyle } from '@/features/styles/plantPageStyles';
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
 import React from 'react';
-import plant from '../../img/haejuplant-rv.png';
-import ficus from '../../img/ficus.png';
+import plant from '/public/static/img/haejuplant-rv.png';
+import ficus from '/public/static/img/ficus.png';
 import PlantAvatar from '@/features/plant/PlantAvatar';
-import cactus from '../../img/cactus.png';
-import blueStar from '../../img/blueStar.png';
+import cactus from '/public/static/img/cactus.png';
+import blueStar from '/public/static/img/blueStar.png';
 import PlantTabs from '@/features/plant/PlantTabs';
 import clientPromise from '@/lib/mongo';
+import ImageUploader from '@/features/ImageUploader';
 
 export async function getServerSideProps() {
   const client = await clientPromise;
   const db = client.db('planty');
   const plants = await db.collection('plants').find({}).toArray();
-  console.log(plants, ' ???plants');
+  // console.log(plants, ' ???plants');
   return { props: { hello: 'hello' } };
 }
 
@@ -63,6 +64,7 @@ const Plants = () => {
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
         <PlantTabs />
+        <ImageUploader />
       </Box>
     </>
   );
