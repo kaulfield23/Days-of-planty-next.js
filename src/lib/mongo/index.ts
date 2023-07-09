@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { GridFSBucket, MongoClient } from 'mongodb';
 
 const url = process.env.DB_URL;
 

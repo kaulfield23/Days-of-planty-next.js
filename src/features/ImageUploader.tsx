@@ -21,12 +21,17 @@ const ImageUploader = () => {
     console.log(formData, ' data?');
 
     fetch(`/api/image`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
       method: 'POST',
       body: formData,
     });
+
+    // await fetch('/api/image', {
+    //   method: 'POST',
+
+    //   body: JSON.stringify({
+    //     data: 'hello',
+    //   }),
+    // });
     // 4. use axios to send the FormData
     // await axios.post('/api/image', formData);
   };
