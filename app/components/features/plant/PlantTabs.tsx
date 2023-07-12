@@ -1,11 +1,13 @@
+'use client';
+
 import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { plantPageStyle } from 'app/styles/PlantPageStyle';
 import { useState } from 'react';
-import { plantPageStyle } from '../styles/plantPageStyles';
 
 const PlantTabs = () => {
   const [value, setValue] = useState(0);
 
-  const TabPanel = (props) => {
+  const TabPanel = (props: any) => {
     const { children, value, index, ...other } = props;
 
     return (
