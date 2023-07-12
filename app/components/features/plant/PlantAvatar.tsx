@@ -1,3 +1,5 @@
+'use client';
+
 import { Box, Avatar, Typography, Paper } from '@mui/material';
 
 interface PlantAvatarProps {
