@@ -27,9 +27,7 @@ const PlantAvatar = ({ pic, review, name, bgColor }: PlantAvatarProps) => {
           sx={{ width: 100, height: 100, backgroundColor: `${bgColor}`, mr: 2 }}
         />
         <Box>
-          <Typography variant="h6" sx={{ fontFamily: 'Rajdhani' }}>
-            "{review}"
-          </Typography>
+          <Typography variant="h6">"{review}"</Typography>
           <Typography variant="subtitle1">- {name}</Typography>
         </Box>
       </Box>

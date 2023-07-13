@@ -1,9 +1,15 @@
 import { createTheme } from '@mui/material/styles';
 import { blue, green } from '@mui/material/colors';
+import { Rajdhani } from 'next/font/google';
+const rajdhani = Rajdhani({
+  subsets: ['latin'],
+  weight: ['400'],
+  style: ['normal'],
+});
 
 export const theme = createTheme({
   typography: {
-    fontFamily: 'Rajdhani',
+    fontFamily: rajdhani.style.fontFamily,
   },
   palette: {
     primary: {

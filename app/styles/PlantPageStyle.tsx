@@ -3,7 +3,6 @@ import plant from '../../img/haejuplant-rv.png';
 
 export const plantPageStyle: Record<string, SxProps<Theme> | undefined> = {
   title: {
-    fontFamily: 'Rajdhani',
     textAlign: 'center',
   },
   titleBox: { zIndex: 1000 },
