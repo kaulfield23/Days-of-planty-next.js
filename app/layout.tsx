@@ -1,7 +1,5 @@
+import Navbar from 'components/features/Navbar';
 import { Metadata } from 'next';
-// import { ThemeProvider } from '@mui/material';
-// import { theme } from './styles/theme';
-import Navbar from './components/features/Navbar';
 import './globals.css';
 import ProvidersWrapper from './ProvidersWrapper';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import { Box, Typography } from '@mui/material';
-import { indexStyle } from './styles/IndexStyle';
+import { indexStyle } from 'styles/IndexStyle';
 
 const HomePage = () => {
   return (

@@ -5,11 +5,11 @@ import plant from '/public/static/img/haejuplant-rv.png';
 import ficus from '/public/static/img/ficus.png';
 import cactus from '/public/static/img/cactus.png';
 import blueStar from '/public/static/img/blueStar.png';
-import clientPromise from 'app/lib/mongo';
-import ImageUploader from 'app/components/features/ImageUploader';
-import PlantAvatar from 'app/components/features/plant/PlantAvatar';
-import PlantTabs from 'app/components/features/plant/PlantTabs';
-import { plantPageStyle } from 'app/styles/PlantPageStyle';
+import clientPromise from 'lib/mongo';
+import ImageUploader from 'components/features/ImageUploader';
+import PlantAvatar from 'components/features/plant/PlantAvatar';
+import PlantTabs from 'components/features/plant/PlantTabs';
+import { plantPageStyle } from 'styles/PlantPageStyle';
 
 async function getPlantsData() {
   const client = await clientPromise;
