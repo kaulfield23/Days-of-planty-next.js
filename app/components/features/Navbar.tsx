@@ -1,17 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import { SpeedDial, SpeedDialAction } from '@mui/material';
+import { Box, SpeedDial, SpeedDialAction } from '@mui/material';
 
-// import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { Grass, LocalFlorist } from '@mui/icons-material';
 
 const Navbar = () => {
-  // const router = useRouter();
+  const router = useRouter();
 
   const actions = [
     {
-      icon: <Grass />,
+      icon: <Grass onClick={() => router.push('/plants')} />,
       name: 'Plants',
     },
   ];
@@ -19,7 +19,7 @@ const Navbar = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <>
+    <Box>
       <SpeedDial
         direction="down"
         ariaLabel="Navbar"
@@ -33,7 +33,7 @@ const Navbar = () => {
         icon={
           <LocalFlorist
             sx={{ color: 'white' }}
-            // onClick={() => router.push('/')}
+            onClick={() => router.push('/')}
           />
         }
         open={open}
@@ -57,7 +57,7 @@ const Navbar = () => {
           />
         ))}
       </SpeedDial>
-    </>
+    </Box>
   );
 };
 

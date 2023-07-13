@@ -12,7 +12,6 @@ export const indexStyle: Record<string, SxProps<Theme> | undefined> = {
     position: 'relative',
   },
   text: {
-    fontFamily: 'Rajdhani',
     fontWeight: 400,
     color: 'white',
   },
