@@ -18,9 +18,8 @@ const ImageUploader = () => {
     // 3. build form data
     const formData = new FormData();
     for (const file of Array.from(input.files ?? [])) {
-      formData.append(file.name, file);
+      formData.append("image", file);
     }
-    console.log(formData, ' data?');
 
     fetch(`/api/image`, {
       method: 'POST',

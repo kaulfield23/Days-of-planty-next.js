@@ -1,4 +1,5 @@
 import clientPromise from 'lib/mongo';
+import { plantImages } from 'lib/mongo/models';
 import { NextResponse } from 'next/server';
 import { Readable } from 'stream';
 
@@ -11,21 +12,28 @@ export async function POST(request: Request) {
   try {
     for (const entry of Array.from(data.entries())) {
       const [key, value] = entry;
-      // FormDataEntryValue can either be type Blob or string
-      // if its type is object then it's a Blob
-      const isFile = typeof value === 'object';
 
-      if (isFile) {
-        const blob = value;
-        const filename = blob.name;
-
-        //conver the blob to stream
-        const buffer = Buffer.from(await blob.arrayBuffer());
-        const stream = Readable.from(buffer);
+      if (key === 'image') {
+        console.info(`key = ${key} is probably image blob`);
+        const blob = value as Blob;
+        // const filename = blob.name;
+        // console.info(`filename = ${filename}`);
 
         const client = await clientPromise;
         const db = client.db('planty');
-        // let post = await db.collection('image').insertOne({});
+        const imageCollection = db.collection('image');
+
+        //conver the blob to stream
+        const buffer = Buffer.from(await blob.arrayBuffer());
+        // const stream = Readable.from(buffer);
+
+        const imageInfo = {
+          image: buffer,
+          contentType: blob.type,
+          filename: blob.name,
+        };
+        const uploadImage = new plantImages(imageInfo);
+        await imageCollection.insertOne(uploadImage);
       }
     }
   } catch (err) {
