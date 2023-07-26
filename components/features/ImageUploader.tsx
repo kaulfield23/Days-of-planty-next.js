@@ -1,13 +1,14 @@
 'use client';
 
-import { Button, Box } from '@mui/material';
+import { Button, Box, Typography } from '@mui/material';
 import React, { ChangeEvent, FormEvent, useRef, useState } from 'react';
 import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternateOutlined';
+import Image from 'next/image';
 
 const ImageUploader = () => {
   // 1. add reference to input element
   const ref = useRef<HTMLInputElement>(null);
-  const [filename, setFilename] = useState('');
+  const [imgFile, setImgFile] = useState<Blob | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,23 +19,13 @@ const ImageUploader = () => {
     // 3. build form data
     const formData = new FormData();
     for (const file of Array.from(input.files ?? [])) {
-      formData.append("image", file);
+      formData.append('image', file);
     }
 
     fetch(`/api/image`, {
       method: 'POST',
       body: formData,
     });
-
-    // await fetch('/api/image', {
-    //   method: 'POST',
-
-    //   body: JSON.stringify({
-    //     data: 'hello',
-    //   }),
-    // });
-    // 4. use axios to send the FormData
-    // await axios.post('/api/image', formData);
   };
 
   const handleUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,41 +33,65 @@ const ImageUploader = () => {
       return;
     }
     const file = e.target.files[0];
-    console.log(file);
     const { name } = file;
-    setFilename(name);
+    setImgFile(file);
   };
   return (
-    <Box display="flex">
-      <form onSubmit={handleSubmit}>
-        <Button
-          component="label"
-          variant="contained"
-          startIcon={<AddPhotoAlternateOutlinedIcon />}
-          sx={{ marginRight: '1rem' }}
+    <form onSubmit={handleSubmit}>
+      <Box display="flex" flexDirection={'column'} sx={{ width: 300 }}>
+        <Box
+          sx={{
+            border: '5px grey dashed',
+            p: 2,
+          }}
         >
-          Upload image
-          <input
-            type="file"
-            accept="image/png, image/jpeg"
-            hidden
-            ref={ref}
-            onChange={handleUploadImage}
-          />
+          {!imgFile && (
+            <Box
+              sx={{
+                width: 200,
+                height: 200,
+                backgroundColor: 'lightgrey',
+                margin: '0 auto',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography variant="body1" color={'grey'}>
+                Preview
+              </Typography>
+            </Box>
+          )}
+          {imgFile && (
+            <Image
+              src={URL.createObjectURL(imgFile as Blob)}
+              alt="Thumb"
+              width={0}
+              height={0}
+              style={{ width: '200px', height: 'auto' }}
+            />
+          )}
+          <Button
+            component="label"
+            variant="text"
+            startIcon={<AddPhotoAlternateOutlinedIcon />}
+            sx={{ marginRight: '1rem', mt: 1 }}
+          >
+            Add image
+            <input
+              type="file"
+              accept="image/png, image/jpeg"
+              hidden
+              ref={ref}
+              onChange={handleUploadImage}
+            />
+          </Button>
+        </Box>
+        <Button type="submit" variant="contained" sx={{ mt: 1 }}>
+          OK
         </Button>
-        <h2>{filename}</h2>
-        <Button type="submit">Upload</Button>
-      </form>
-      {/* <form onSubmit={handleSubmit}>
-        <input type="file" name="files" ref={ref} multiple />
-        <button
-          type="submit"
-          className="px-2 py-1 rounded-md bg-violet-50 text-violet-500"
-        >
-          Upload
-        </button>
-      </form> */}
-    </Box>
+      </Box>
+    </form>
   );
 };
 

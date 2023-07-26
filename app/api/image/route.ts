@@ -1,7 +1,6 @@
 import clientPromise from 'lib/mongo';
 import { plantImages } from 'lib/mongo/models';
 import { NextResponse } from 'next/server';
-import { Readable } from 'stream';
 
 export async function GET(request: Request) {
   return new Response('goodbye');
