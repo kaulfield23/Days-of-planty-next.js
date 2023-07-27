@@ -65,7 +65,6 @@ const Plants = async () => {
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
         <PlantTabs />
-        <ImageUploader />
       </Box>
     </>
   );

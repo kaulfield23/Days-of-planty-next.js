@@ -13,16 +13,11 @@ export async function POST(request: Request) {
       const [key, value] = entry;
 
       if (key === 'image') {
-        console.info(`key = ${key} is probably image blob`);
-        const blob = value as Blob;
-        // const filename = blob.name;
-        // console.info(`filename = ${filename}`);
-
+        const blob = value as File;
         const client = await clientPromise;
         const db = client.db('planty');
         const imageCollection = db.collection('image');
 
-        //conver the blob to stream
         const buffer = Buffer.from(await blob.arrayBuffer());
         // const stream = Readable.from(buffer);
 
@@ -35,9 +30,13 @@ export async function POST(request: Request) {
         await imageCollection.insertOne(uploadImage);
       }
     }
+    return NextResponse.json({ message: 'Success' }, { status: 200 });
   } catch (err) {
     console.error(err);
   }
 
-  return NextResponse.json({ message: 'hello there' }, { status: 200 });
+  return NextResponse.json(
+    { message: 'Something went wrong' },
+    { status: 400 }
+  );
 }

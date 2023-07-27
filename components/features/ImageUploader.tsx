@@ -6,26 +6,27 @@ import AddPhotoAlternateOutlinedIcon from '@mui/icons-material/AddPhotoAlternate
 import Image from 'next/image';
 
 const ImageUploader = () => {
-  // 1. add reference to input element
   const ref = useRef<HTMLInputElement>(null);
   const [imgFile, setImgFile] = useState<Blob | null>(null);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // 2. get reference to the input element
     const input = ref.current!;
 
-    // 3. build form data
     const formData = new FormData();
     for (const file of Array.from(input.files ?? [])) {
       formData.append('image', file);
     }
 
-    fetch(`/api/image`, {
+    const res = await fetch(`/api/image`, {
       method: 'POST',
       body: formData,
     });
+
+    if (res.status === 200) {
+      console.log('yay');
+    }
   };
 
   const handleUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -33,7 +34,6 @@ const ImageUploader = () => {
       return;
     }
     const file = e.target.files[0];
-    const { name } = file;
     setImgFile(file);
   };
   return (
