@@ -25,7 +25,6 @@ const ImageUploader = () => {
     });
 
     if (res.status === 200) {
-      console.log('yay');
     }
   };
 

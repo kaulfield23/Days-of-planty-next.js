@@ -1,10 +1,15 @@
 'use client';
 
-import { Box, Tabs, Tab, Typography } from '@mui/material';
+import { Box, Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
 import { plantPageStyle } from 'styles/PlantPageStyle';
+import { PlantCategoryEnum } from './ColorIndicator';
+import PlantCard from './PlantCard';
+interface PlantTabsProps {
+  plants: any;
+}
 
-const PlantTabs = () => {
+const PlantTabs = ({ plants }: PlantTabsProps) => {
   const [value, setValue] = useState(0);
 
   const TabPanel = (props: any) => {
@@ -14,45 +19,52 @@ const PlantTabs = () => {
       <div
         role="tabpanel"
         hidden={value !== index}
-        id={`vertical-tabpanel-${index}`}
-        aria-labelledby={`vertical-tab-${index}`}
+        id={`tabpanel-${index}`}
+        aria-labelledby={`tab-${index}`}
         {...other}
       >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
+        {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
       </div>
     );
   };
 
   return (
     <Box sx={plantPageStyle.plantTabsBox}>
-      <Tabs
-        orientation="vertical"
-        variant="scrollable"
-        value={value}
-        onChange={(e, value) => setValue(value)}
-        textColor="primary"
-        indicatorColor="primary"
-        sx={{ borderRight: 1, borderColor: 'divider' }}
-      >
-        {['ALL', 'TREE', 'FERN', 'ETC'].map((item) => (
-          <Tab label={item} sx={plantPageStyle.plantTab} key={item} />
-        ))}
-      </Tabs>
+      <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+        <Tabs
+          value={value}
+          onChange={(e, value) => setValue(value)}
+          indicatorColor="primary"
+          sx={{ borderRight: 1, borderColor: 'divider' }}
+        >
+          {['ALL', 'FERN', 'TREE', 'ETC'].map((item) => (
+            <Tab label={item} sx={plantPageStyle.plantTab} key={item} />
+          ))}
+        </Tabs>
+      </Box>
       <TabPanel value={value} index={0}>
-        Item One
+        <PlantCard plants={plants} />
       </TabPanel>
       <TabPanel value={value} index={1}>
-        Item Two
+        <PlantCard
+          plants={plants.filter(
+            (plant: any) => plant.category === PlantCategoryEnum.FERN
+          )}
+        />
       </TabPanel>
       <TabPanel value={value} index={2}>
-        Item Three
+        <PlantCard
+          plants={plants.filter(
+            (plant: any) => plant.category === PlantCategoryEnum.TREE
+          )}
+        />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        Item Four
+        <PlantCard
+          plants={plants.filter(
+            (plant: any) => plant.category === PlantCategoryEnum.ETC
+          )}
+        />
       </TabPanel>
     </Box>
   );
