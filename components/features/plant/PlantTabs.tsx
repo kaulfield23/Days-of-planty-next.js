@@ -3,16 +3,24 @@
 import { Box, Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
 import { plantPageStyle } from 'styles/PlantPageStyle';
+import { PlantsTypes } from 'utils/types';
 import { PlantCategoryEnum } from './ColorIndicator';
 import PlantCard from './PlantCard';
 interface PlantTabsProps {
-  plants: any;
+  plants: PlantsTypes[];
+}
+
+interface TabPanelProps {
+  children?: React.ReactNode;
+  dir?: string;
+  index: number;
+  value: number;
 }
 
 const PlantTabs = ({ plants }: PlantTabsProps) => {
   const [value, setValue] = useState(0);
 
-  const TabPanel = (props: any) => {
+  const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
 
     return (
@@ -48,21 +56,21 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
       <TabPanel value={value} index={1}>
         <PlantCard
           plants={plants.filter(
-            (plant: any) => plant.category === PlantCategoryEnum.FERN
+            (plant) => plant.category === PlantCategoryEnum.FERN
           )}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <PlantCard
           plants={plants.filter(
-            (plant: any) => plant.category === PlantCategoryEnum.TREE
+            (plant) => plant.category === PlantCategoryEnum.TREE
           )}
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <PlantCard
           plants={plants.filter(
-            (plant: any) => plant.category === PlantCategoryEnum.ETC
+            (plant) => plant.category === PlantCategoryEnum.ETC
           )}
         />
       </TabPanel>
