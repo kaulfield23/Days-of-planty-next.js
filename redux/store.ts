@@ -3,7 +3,7 @@ import plantsSlice from './feature/plantSlice';
 
 export const store = configureStore({
   reducer: {
-    plants: plantsSlice.reducer,
+    plantsReducer: plantsSlice.reducer,
   },
 });
 

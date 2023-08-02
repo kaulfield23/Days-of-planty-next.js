@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { PlantsTypes } from 'utils/types';
 export interface PlantStoreSlice {
   plants: PlantsTypes[];
@@ -13,7 +13,9 @@ export const plantsSlice = createSlice({
   initialState,
   name: 'plants',
   reducers: {
-    plantsLoad: () => {},
+    plantsLoad: (state, action) => {
+      state.plants = action.payload;
+    },
   },
 });
 

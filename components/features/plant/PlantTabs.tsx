@@ -2,6 +2,8 @@
 
 import { Box, Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
+import { plantsLoad } from 'redux/feature/plantSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { PlantsTypes } from 'utils/types';
 import { PlantCategoryEnum } from './ColorIndicator';
@@ -18,6 +20,10 @@ interface TabPanelProps {
 }
 
 const PlantTabs = ({ plants }: PlantTabsProps) => {
+  const dispatch = useAppDispatch();
+  dispatch(plantsLoad(plants));
+  const hello = useAppSelector((state) => state.plantsReducer.plants);
+
   const [value, setValue] = useState(0);
 
   const TabPanel = (props: TabPanelProps) => {

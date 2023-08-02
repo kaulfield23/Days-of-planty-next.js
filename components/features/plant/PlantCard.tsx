@@ -9,15 +9,13 @@ import {
 import { PlantsTypes } from 'utils/types';
 import ColorIndicator, { PlantCategoryEnum } from './ColorIndicator';
 import { useRouter } from 'next/navigation';
-import { useAppSelector } from 'redux/hooks';
 
 interface PlantCardProps {
   plants: PlantsTypes[];
 }
 const PlantCard = ({ plants }: PlantCardProps) => {
   const router = useRouter();
-  const hello = useAppSelector((state) => state.plants.comments);
-  console.log(hello, ' this is hello');
+
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
       {plants.map((plant) => {
@@ -29,7 +27,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
               const fixedPath = plant.name.includes(' ')
                 ? plant.name.replace(' ', '_')
                 : plant.name;
-              // router.push
+              router.push(`/plants/${fixedPath}`);
             }}
           >
             <CardActionArea>

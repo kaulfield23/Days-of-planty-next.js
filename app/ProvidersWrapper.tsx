@@ -1,8 +1,9 @@
 'use client';
 
 import { ThemeProvider } from '@mui/material';
-import { ReduxProvider } from 'redux/provider';
 import { theme } from 'styles/theme';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from 'redux/store';
 
 export default function ProvidersWrapper({
   children,
@@ -10,7 +11,7 @@ export default function ProvidersWrapper({
   children: React.ReactNode;
 }) {
   return (
-    <ReduxProvider>
+    <ReduxProvider store={store}>
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ReduxProvider>
   );
