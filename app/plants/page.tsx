@@ -6,7 +6,6 @@ import ficus from '/public/static/img/ficus.png';
 import cactus from '/public/static/img/cactus.png';
 import blueStar from '/public/static/img/blueStar.png';
 import clientPromise from 'lib/mongo';
-import ImageUploader from 'components/features/ImageUploader';
 import PlantAvatar from 'components/features/plant/PlantAvatar';
 import PlantTabs from 'components/features/plant/PlantTabs';
 import { plantPageStyle } from 'styles/PlantPageStyle';
@@ -15,7 +14,7 @@ async function getPlantsData() {
   const client = await clientPromise;
   const db = client.db('planty');
   const plants = await db.collection('plants').find({}).toArray();
-  return plants;
+  return JSON.stringify(plants);
 }
 
 const Plants = async () => {
@@ -48,23 +47,23 @@ const Plants = async () => {
           pic={ficus.src}
           review={'This is the best website to keep me sane'}
           name={'Rubber tree'}
-          bgColor={'#b9e7a3'}
+          bgColor={'customGreen.main'}
         />
         <PlantAvatar
           pic={blueStar.src}
           review={"I thought I wouldn't survive but I'm still alive"}
           name={'Fern'}
-          bgColor={'#d3cece'}
+          bgColor={'customGrey.main'}
         />
         <PlantAvatar
           pic={cactus.src}
           review={"I'm lucky that I don't need so much care"}
           name={'Cactus'}
-          bgColor={'#fae790'}
+          bgColor={'customYellow.main'}
         />
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
-        <PlantTabs />
+        <PlantTabs plants={JSON.parse(data)} />
       </Box>
     </>
   );
