@@ -8,16 +8,28 @@ import {
 } from '@mui/material';
 import { PlantsTypes } from 'utils/types';
 import ColorIndicator, { PlantCategoryEnum } from './ColorIndicator';
+import { useRouter } from 'next/navigation';
 
 interface PlantCardProps {
   plants: PlantsTypes[];
 }
 const PlantCard = ({ plants }: PlantCardProps) => {
+  const router = useRouter();
+
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
       {plants.map((plant) => {
         return (
-          <Card sx={{ maxWidth: 350, padding: 1, m: 2 }} key={plant.name}>
+          <Card
+            sx={{ maxWidth: 350, padding: 1, m: 2 }}
+            key={plant.name}
+            onClick={() => {
+              const fixedPath = plant.name.includes(' ')
+                ? plant.name.replace(' ', '_')
+                : plant.name;
+              // router.push
+            }}
+          >
             <CardActionArea>
               <ColorIndicator
                 plantCategory={plant.category as PlantCategoryEnum}
@@ -33,7 +45,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                 <Typography variant="h4" component="div">
                   {plant.nickname}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body1" color="text.secondary">
                   {plant.desc}
                 </Typography>
               </CardContent>
