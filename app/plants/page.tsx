@@ -8,25 +8,20 @@ import ficus from '/public/static/img/ficus.png';
 import cactus from '/public/static/img/cactus.png';
 import blueStar from '/public/static/img/blueStar.png';
 import PlantAvatar from 'components/features/plant/PlantAvatar';
-// import PlantTabs from 'components/features/plant/PlantTabs';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { fetchPlants } from 'redux/feature/plantSlice';
-import { useAppDispatch } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import PlantTabs from 'components/features/plant/PlantTabs';
 
-// async function getPlantsData() {
-//   const client = await clientPromise;
-//   const db = client.db('planty');
-//   const plants = await db.collection('plants').find({}).toArray();
-//   return JSON.stringify(plants);
-// }
-
-const Plants = async () => {
+const Plants = () => {
   const dispatch = useAppDispatch();
-  // let data = '';
-  // dispatch(fetchPlants());
+
   useEffect(() => {
     dispatch(fetchPlants());
   }, []);
+
+  const plants = useAppSelector((state) => state.plantsReducer.plants);
+
   return (
     <>
       <Box sx={plantPageStyle.header}>
@@ -70,7 +65,7 @@ const Plants = async () => {
         />
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
-        {/* <PlantTabs plants={JSON.parse(data)} /> */}
+        <PlantTabs plants={plants} />
       </Box>
     </>
   );
