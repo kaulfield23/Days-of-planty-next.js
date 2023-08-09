@@ -12,12 +12,14 @@ const initialState: PlantStoreSlice = {
 };
 
 export const fetchPlants = createAsyncThunk('plants/fetchPlants', async () => {
-  // const client = await clientPromise;
-  // const test = testWaht();
-  // const db = client.db('planty');
-  // const plants = await db.collection('plants').find({}).toArray();
-  // return JSON.stringify(plants);
-  return JSON.stringify('hello');
+  try {
+    const res = await fetch('/api/plants');
+    console.log(res.json());
+
+    // return JSON.parse(res.body);
+  } catch {
+    console.log('error');
+  }
 });
 
 export const plantsSlice = createSlice({
@@ -28,15 +30,15 @@ export const plantsSlice = createSlice({
       state.plants = action.payload;
     },
   },
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchPlants.pending, (state, action) => {
-  //       console.log(action, ' pending');
-  //     })
-  //     .addCase(fetchPlants.fulfilled, (state, action) => {
-  //       state.plants = JSON.parse(action.payload);
-  //     });
-  // },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchPlants.pending, (state, action) => {
+        // console.log(action, ' pending');
+      })
+      .addCase(fetchPlants.fulfilled, (state, action) => {
+        state.plants = action.payload;
+      });
+  },
 });
 
 // export async function fetchPlants(dispatch: any) {
