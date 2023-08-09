@@ -2,10 +2,6 @@ import clientPromise from 'lib/mongo';
 import { plantImages } from 'lib/mongo/models';
 import { NextResponse } from 'next/server';
 
-export async function GET(request: Request) {
-  return new Response('goodbye');
-}
-
 export async function POST(request: Request) {
   const data = await request.formData();
   try {
@@ -19,7 +15,6 @@ export async function POST(request: Request) {
         const imageCollection = db.collection('image');
 
         const buffer = Buffer.from(await blob.arrayBuffer());
-        // const stream = Readable.from(buffer);
 
         const imageInfo = {
           image: buffer,
