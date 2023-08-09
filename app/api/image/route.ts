@@ -15,7 +15,6 @@ export async function POST(request: Request) {
         const imageCollection = db.collection('image');
 
         const buffer = Buffer.from(await blob.arrayBuffer());
-        // const stream = Readable.from(buffer);
 
         const imageInfo = {
           image: buffer,
