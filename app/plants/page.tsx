@@ -1,25 +1,32 @@
+'use client';
+
 import { Box, Typography } from '@mui/material';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect } from 'react';
 import plant from '/public/static/img/haejuplant-rv.png';
 import ficus from '/public/static/img/ficus.png';
 import cactus from '/public/static/img/cactus.png';
 import blueStar from '/public/static/img/blueStar.png';
-import clientPromise from 'lib/mongo';
 import PlantAvatar from 'components/features/plant/PlantAvatar';
-import PlantTabs from 'components/features/plant/PlantTabs';
+// import PlantTabs from 'components/features/plant/PlantTabs';
 import { plantPageStyle } from 'styles/PlantPageStyle';
+import { fetchPlants } from 'redux/feature/plantSlice';
+import { useAppDispatch } from 'redux/hooks';
 
-async function getPlantsData() {
-  const client = await clientPromise;
-  const db = client.db('planty');
-  const plants = await db.collection('plants').find({}).toArray();
-  return JSON.stringify(plants);
-}
+// async function getPlantsData() {
+//   const client = await clientPromise;
+//   const db = client.db('planty');
+//   const plants = await db.collection('plants').find({}).toArray();
+//   return JSON.stringify(plants);
+// }
 
 const Plants = async () => {
-  const data = await getPlantsData();
-
+  const dispatch = useAppDispatch();
+  // let data = '';
+  // dispatch(fetchPlants());
+  useEffect(() => {
+    dispatch(fetchPlants());
+  }, []);
   return (
     <>
       <Box sx={plantPageStyle.header}>
@@ -63,7 +70,7 @@ const Plants = async () => {
         />
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
-        <PlantTabs plants={JSON.parse(data)} />
+        {/* <PlantTabs plants={JSON.parse(data)} /> */}
       </Box>
     </>
   );

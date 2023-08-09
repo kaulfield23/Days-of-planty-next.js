@@ -7,7 +7,7 @@ interface PlantDetailProps {
 }
 
 const PlantDetail = ({ params }: PlantDetailProps) => {
-  const plants = useAppSelector((state) => state.plantsReducer.plants);
+  // const plants = useAppSelector((state) => state.plantsReducer.plants);
 
   return <Box>{''}</Box>;
 };
