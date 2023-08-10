@@ -30,7 +30,6 @@ const PlantCard = ({ plants }: PlantCardProps) => {
             const fixedPath = plant.name.includes(' ')
               ? plant.name.replace(' ', '_')
               : plant.name;
-            console.log(plant);
             return (
               <Card sx={{ maxWidth: 350, padding: 1, m: 2 }} key={plant.name}>
                 <Link
