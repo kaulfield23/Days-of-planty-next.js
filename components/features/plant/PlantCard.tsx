@@ -8,7 +8,7 @@ import {
   Typography,
 } from '@mui/material';
 import { PlantsTypes } from 'utils/types';
-import ColorIndicator, { PlantCategoryEnum } from './ColorIndicator';
+import CategoryIndicator, { PlantCategoryEnum } from './ColorIndicator';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 // import { useRouter } from 'next/router';
@@ -39,8 +39,9 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                   }}
                 >
                   <CardActionArea>
-                    <ColorIndicator
+                    <CategoryIndicator
                       plantCategory={plant.category as PlantCategoryEnum}
+                      height={20}
                     />
                     <CardMedia
                       component="img"
@@ -52,7 +53,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                       <Typography
                         variant="h4"
                         component="div"
-                        // sx={{ textTransform: 'capitalize' }}
+                        sx={{ textTransform: 'capitalize' }}
                       >
                         {plant.name}
                       </Typography>
