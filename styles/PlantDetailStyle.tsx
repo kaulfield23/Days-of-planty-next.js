@@ -13,7 +13,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
   },
   background: {
     height: '100vh',
-    backgroundColor: 'beige',
+    // backgroundColor: 'beige',
   },
   info: {
     height: '50%',

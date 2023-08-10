@@ -1,11 +1,12 @@
 'use client';
-import { Box, Divider, Typography } from '@mui/material';
+import { Box, Divider, Tooltip, Typography } from '@mui/material';
 import { useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
-import { WaterDrop, WbSunny } from '@mui/icons-material';
+import { WaterDrop, WbSunny, FilterVintage, Grass } from '@mui/icons-material';
 import PlantCareScale from 'components/features/plant/PlantCareScale';
+
 import CategoryIndicator, {
   PlantCategoryEnum,
 } from 'components/features/plant/ColorIndicator';
@@ -74,6 +75,15 @@ const PlantDetail = () => {
                     text={plant.category}
                     padding={1}
                   />
+                  <Tooltip
+                    title={plant.flower ? 'Flowering plant' : 'No flower'}
+                  >
+                    {plant.flower ? (
+                      <FilterVintage sx={{ color: '#ff6969', ml: 0.5 }} />
+                    ) : (
+                      <Grass sx={{ color: '#ceffcc', ml: 0.5 }} />
+                    )}
+                  </Tooltip>
                 </Box>
                 <Divider
                   orientation="vertical"
