@@ -4,12 +4,19 @@ import { useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
-import { WaterDrop, WbSunny, FilterVintage, Grass } from '@mui/icons-material';
+import {
+  WaterDrop,
+  WbSunny,
+  LocalFloristOutlined,
+  MacroOffOutlined,
+  ShoppingCartTwoTone,
+} from '@mui/icons-material';
 import PlantCareScale from 'components/features/plant/PlantCareScale';
 
 import CategoryIndicator, {
   PlantCategoryEnum,
 } from 'components/features/plant/ColorIndicator';
+import PlantCondition from 'components/features/plant/PlantCondition';
 
 const PlantDetail = () => {
   const plants = useAppSelector((state) => state.plantsReducer.plants);
@@ -19,9 +26,8 @@ const PlantDetail = () => {
   return (
     <>
       {plant !== undefined && (
-        <Box sx={PlantDetailStyle.background}>
+        <Box sx={PlantDetailStyle.plantBox}>
           <Box sx={PlantDetailStyle.header}>
-            <Box sx={PlantDetailStyle.imgBox}></Box>
             <Image
               src={`/static/img/${plant.imgName}.png`}
               width={400}
@@ -34,8 +40,9 @@ const PlantDetail = () => {
               variant="h4"
               sx={{ textTransform: 'capitalize', pt: 5 }}
             >
-              {plant!.name}
+              {plant.name}
             </Typography>
+            <PlantCondition condition={plant.condition} maxNum={5} />
             <Typography
               variant="h6"
               sx={{ textTransform: 'capitalize', pt: 1 }}
@@ -79,9 +86,13 @@ const PlantDetail = () => {
                     title={plant.flower ? 'Flowering plant' : 'No flower'}
                   >
                     {plant.flower ? (
-                      <FilterVintage sx={{ color: '#ff6969', ml: 0.5 }} />
+                      <LocalFloristOutlined
+                        sx={{ color: '#f7ffae', ml: 0.5, fontSize: '30px' }}
+                      />
                     ) : (
-                      <Grass sx={{ color: '#ceffcc', ml: 0.5 }} />
+                      <MacroOffOutlined
+                        sx={{ color: '#f7ffae', ml: 0.5, fontSize: '30px' }}
+                      />
                     )}
                   </Tooltip>
                 </Box>
@@ -91,25 +102,18 @@ const PlantDetail = () => {
                   flexItem
                   sx={{ bgcolor: 'white', mx: 2 }}
                 />
-                <Box display="flex" flexDirection="column">
-                  <Box display="flex" alignItems="center" sx={{ mb: 0.8 }}>
-                    <WaterDrop sx={{ color: '#a7d1f8', fontSize: '40px' }} />
-                    <PlantCareScale
-                      input={plant.water}
-                      maxNum={5}
-                      color={'#a7d1f8'}
-                    />
-                  </Box>
-                  <Box display="flex" alignItems="center">
-                    <WbSunny sx={{ color: '#ffc548', fontSize: '40px' }} />
-                    <PlantCareScale
-                      input={plant.sun}
-                      maxNum={5}
-                      color={'#ffc548'}
-                    />
-                  </Box>
+                <Box display="flex" alignItems="center">
+                  <Tooltip title="Purchase date">
+                    <ShoppingCartTwoTone sx={{ mr: 0.5, fontSize: '30px' }} />
+                  </Tooltip>
+                  <Typography variant="h6">
+                    {new Date(plant.date).toISOString().split('T')[0]}
+                  </Typography>
                 </Box>
               </Box>
+            </Box>
+            <Box sx={PlantDetailStyle.desc}>
+              <Typography>{plant.desc}</Typography>
             </Box>
           </Box>
         </Box>

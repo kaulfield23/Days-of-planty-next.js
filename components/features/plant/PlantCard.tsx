@@ -9,18 +9,13 @@ import {
 } from '@mui/material';
 import { PlantsTypes } from 'utils/types';
 import CategoryIndicator, { PlantCategoryEnum } from './ColorIndicator';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-// import { useRouter } from 'next/router';
 
 interface PlantCardProps {
   plants: PlantsTypes[];
 }
 
 const PlantCard = ({ plants }: PlantCardProps) => {
-  const router = useRouter();
-  // const itemLoads = useAppSelector((state) => state.plantsReducer.itemLoads);
-
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
       {plants.length === 0 && <CircularProgress sx={{ mt: 3 }} />}

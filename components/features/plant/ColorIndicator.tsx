@@ -8,7 +8,7 @@ export enum PlantCategoryEnum {
   ETC = 'etc',
 }
 
-interface ColorIndicatorProps {
+interface CategoryIndicatorProps {
   plantCategory: PlantCategoryEnum;
   height: number;
   text?: string;
@@ -19,7 +19,7 @@ const CategoryIndicator = ({
   height,
   text,
   padding,
-}: ColorIndicatorProps) => {
+}: CategoryIndicatorProps) => {
   let tagColor;
 
   if (plantCategory === PlantCategoryEnum.ALL) {
@@ -45,7 +45,7 @@ const CategoryIndicator = ({
       {text && (
         <Typography
           variant="h6"
-          sx={{ color: '#292621', textTransform: 'capitalize' }}
+          sx={{ color: 'customBlack.main', textTransform: 'capitalize' }}
         >
           {text}
         </Typography>

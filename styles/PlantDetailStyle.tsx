@@ -8,11 +8,11 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     height: '400px',
   },
   imgBox: {
-    // paddingTop: 10,
     borderRadius: '10%',
   },
-  background: {
+  plantBox: {
     height: '100vh',
+    marginBottom: 3,
     // backgroundColor: 'beige',
   },
   info: {
@@ -24,5 +24,11 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     borderRadius: '6px',
     color: 'white',
     textAlign: 'center',
+    padding: 5,
+  },
+  desc: {
+    width: '60%',
+    maxWidth: '900px',
+    margin: '20px auto',
   },
 };

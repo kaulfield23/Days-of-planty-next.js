@@ -7,7 +7,12 @@ interface PlantCareScaleProps {
 }
 const PlantCareScale = ({ input, maxNum, color }: PlantCareScaleProps) => {
   const renderScale = (index: number) => {
-    return <CircleIcon sx={{ color: index < input ? color : 'white' }} />;
+    return (
+      <CircleIcon
+        sx={{ color: index < input ? color : 'white' }}
+        key={`circle-${index}`}
+      />
+    );
   };
   return (
     <>{Array.from({ length: maxNum }, (_, index) => renderScale(index))}</>
