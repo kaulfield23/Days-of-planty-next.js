@@ -19,7 +19,7 @@ const Navbar = () => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
-    <Box>
+    <Box sx={{ position: 'fixed', right: 0, zIndex: 1 }}>
       <SpeedDial
         direction="down"
         ariaLabel="Navbar"
