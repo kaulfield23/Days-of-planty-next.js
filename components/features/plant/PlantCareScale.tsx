@@ -9,7 +9,10 @@ const PlantCareScale = ({ input, maxNum, color }: PlantCareScaleProps) => {
   const renderScale = (index: number) => {
     return (
       <CircleIcon
-        sx={{ color: index < input ? color : 'white' }}
+        sx={{
+          color: index < input ? color : 'white',
+          fontSize: { xs: '12px', sm: '18px' },
+        }}
         key={`circle-${index}`}
       />
     );

@@ -6,6 +6,8 @@ import {
   CardMedia,
   CircularProgress,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import { PlantsTypes } from 'utils/types';
 import CategoryIndicator, { PlantCategoryEnum } from './ColorIndicator';
@@ -16,6 +18,9 @@ interface PlantCardProps {
 }
 
 const PlantCard = ({ plants }: PlantCardProps) => {
+  const theme = useTheme();
+  const isMobileSize = useMediaQuery(theme.breakpoints.down('md'));
+
   return (
     <Box display="flex" flexWrap="wrap" justifyContent="center">
       {plants.length === 0 && <CircularProgress sx={{ mt: 3 }} />}
@@ -40,7 +45,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                     />
                     <CardMedia
                       component="img"
-                      height="450"
+                      height={isMobileSize ? 350 : 450}
                       image={`/static/img/${plant.imgName}.png`}
                       alt={plant.name}
                     />

@@ -18,7 +18,9 @@ const PlantCondition = ({ condition, maxNum }: PlantConditionProps) => {
       sx={{ display: 'flex', justifyContent: 'center' }}
     >
       <Box>
-        {Array.from({ length: maxNum }, (_, index) => renderHearts(index))}
+        {Array.from({ length: maxNum }, (_, index) => (
+          <Box key={`heart-${index}`}>{renderHearts(index)}</Box>
+        ))}
       </Box>
     </Tooltip>
   );
