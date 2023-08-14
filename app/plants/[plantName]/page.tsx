@@ -36,7 +36,7 @@ const PlantDetail = () => {
     <>
       {plant !== undefined && (
         <Box sx={PlantDetailStyle.plantBox}>
-          <Box sx={PlantDetailStyle.context}>
+          <Box sx={!isMobileSize ? PlantDetailStyle.context : {}}>
             <Box sx={PlantDetailStyle.header}>
               <Image
                 src={`/static/img/${plant.imgName}.png`}
