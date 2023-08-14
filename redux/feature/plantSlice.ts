@@ -1,13 +1,14 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import clientPromise from 'lib/mongo';
-import { store } from 'redux/store';
 import { PlantsTypes } from 'utils/types';
+
 export interface PlantStoreSlice {
   plants: PlantsTypes[];
+  itemLoads: 'pending' | 'fulfilled' | '';
   comments: [];
 }
 const initialState: PlantStoreSlice = {
   plants: [],
+  itemLoads: '',
   comments: [],
 };
 
@@ -16,25 +17,25 @@ export const fetchPlants = createAsyncThunk('plants/fetchPlants', async () => {
     const response = await fetch('/api/plants').then((res) => res.json());
 
     return response;
-  } catch {
-    console.log('error');
+  } catch (e) {
+    console.log(e);
   }
 });
 
 export const plantsSlice = createSlice({
   initialState,
   name: 'plants',
-  reducers: {
-    plantsLoad: (state, action) => {
-      state.plants = action.payload;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(fetchPlants.pending, (state, action) => {
+      state.itemLoads = action.meta.requestStatus;
+    });
     builder.addCase(fetchPlants.fulfilled, (state, action) => {
+      state.itemLoads = action.meta.requestStatus;
       state.plants = action.payload;
     });
   },
 });
 
 export default plantsSlice;
-export const { plantsLoad } = plantsSlice.actions;
+export const {} = plantsSlice.actions;

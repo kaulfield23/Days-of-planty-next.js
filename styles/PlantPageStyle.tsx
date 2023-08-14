@@ -1,5 +1,4 @@
 import { SxProps, Theme } from '@mui/material';
-import plant from '../../img/haejuplant-rv.png';
 
 export const plantPageStyle: Record<string, SxProps<Theme> | undefined> = {
   title: {

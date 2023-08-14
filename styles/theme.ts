@@ -14,12 +14,14 @@ declare module '@mui/material/styles' {
     customGrey: PaletteColorOptions;
     customGreen: PaletteColorOptions;
     customPink: PaletteColorOptions;
+    customBlack: PaletteColorOptions;
   }
   interface PaletteOptions {
     customYellow: PaletteColorOptions;
     customGrey: PaletteColorOptions;
     customGreen: PaletteColorOptions;
     customPink: PaletteColorOptions;
+    customBlack: PaletteColorOptions;
   }
 }
 
@@ -47,6 +49,9 @@ export let theme = createTheme({
     },
     customPink: {
       main: '#ebb5a8',
+    },
+    customBlack: {
+      main: '#6d6161',
     },
   },
 });

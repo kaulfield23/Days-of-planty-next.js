@@ -1,4 +1,4 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { theme } from 'styles/theme';
 
 export enum PlantCategoryEnum {
@@ -8,10 +8,18 @@ export enum PlantCategoryEnum {
   ETC = 'etc',
 }
 
-interface ColorIndicatorProps {
+interface CategoryIndicatorProps {
   plantCategory: PlantCategoryEnum;
+  height: number;
+  text?: string;
+  padding?: number;
 }
-const ColorIndicator = ({ plantCategory }: ColorIndicatorProps) => {
+const CategoryIndicator = ({
+  plantCategory,
+  height,
+  text,
+  padding,
+}: CategoryIndicatorProps) => {
   let tagColor;
 
   if (plantCategory === PlantCategoryEnum.ALL) {
@@ -24,7 +32,26 @@ const ColorIndicator = ({ plantCategory }: ColorIndicatorProps) => {
     tagColor = 'customYellow.main';
   }
 
-  return <Box bgcolor={tagColor} sx={{ height: '20px' }} />;
+  return (
+    <Box
+      bgcolor={tagColor}
+      sx={{
+        height: height,
+        padding: padding,
+        display: 'flex',
+        alignItems: 'center',
+      }}
+    >
+      {text && (
+        <Typography
+          variant="h6"
+          sx={{ color: 'customBlack.main', textTransform: 'capitalize' }}
+        >
+          {text}
+        </Typography>
+      )}
+    </Box>
+  );
 };
 
-export default ColorIndicator;
+export default CategoryIndicator;
