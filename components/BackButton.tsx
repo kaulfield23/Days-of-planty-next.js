@@ -1,15 +1,18 @@
 import { ArrowBack } from '@mui/icons-material';
 import { Box, Fab } from '@mui/material';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
 
-interface BackButtonProps {
-  onBack: () => void;
-}
-const BackButton = ({ onBack }: BackButtonProps) => {
+const BackButton = () => {
+  const router = useRouter();
   return (
     <Box sx={PlantDetailStyle.backParent}>
-      <Fab sx={PlantDetailStyle.back} size="small" onClick={onBack}>
+      <Fab
+        sx={PlantDetailStyle.back}
+        size="small"
+        onClick={() => router.back()}
+      >
         <ArrowBack />
       </Fab>
     </Box>

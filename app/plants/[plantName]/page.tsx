@@ -25,6 +25,7 @@ import CategoryIndicator, {
 } from 'components/features/plant/ColorIndicator';
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
+import { useEffect } from 'react';
 
 const PlantDetail = () => {
   const plants = useAppSelector((state) => state.plantsReducer.plants);
@@ -34,15 +35,20 @@ const PlantDetail = () => {
   const theme = useTheme();
   const isMobileSize = useMediaQuery(theme.breakpoints.down('md'));
 
-  const handleBack = () => {
-    console.log('back');
-  };
+  useEffect(() => {
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem('scrollPosition');
+    }
+  }, []);
+
   return (
     <>
       {plant !== undefined && (
         <Box sx={PlantDetailStyle.plantBox}>
           <Box sx={!isMobileSize ? PlantDetailStyle.context : {}}>
-            <BackButton onBack={handleBack} />
+            <BackButton />
             <Box sx={PlantDetailStyle.header}>
               <Image
                 src={`/static/img/${plant.imgName}.png`}

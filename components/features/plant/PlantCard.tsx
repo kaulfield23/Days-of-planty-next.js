@@ -37,6 +37,12 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                     pathname: `/plants/${fixedPath}`,
                     query: { plantId: `${plant._id}` },
                   }}
+                  onClick={() =>
+                    sessionStorage.setItem(
+                      'scrollPosition',
+                      `${window.pageYOffset}`
+                    )
+                  }
                 >
                   <CardActionArea>
                     <CategoryIndicator
