@@ -3,13 +3,13 @@ import { PlantsTypes } from 'utils/types';
 
 export interface PlantStoreSlice {
   plants: PlantsTypes[];
-  itemLoads: 'pending' | 'fulfilled' | '';
   comments: [];
+  plantTab: number;
 }
 const initialState: PlantStoreSlice = {
   plants: [],
-  itemLoads: '',
   comments: [],
+  plantTab: 0,
 };
 
 export const fetchPlants = createAsyncThunk('plants/fetchPlants', async () => {
@@ -25,17 +25,18 @@ export const fetchPlants = createAsyncThunk('plants/fetchPlants', async () => {
 export const plantsSlice = createSlice({
   initialState,
   name: 'plants',
-  reducers: {},
+  reducers: {
+    updatePlantTab: (state, action) => {
+      state.plantTab = action.payload;
+    },
+  },
   extraReducers: (builder) => {
-    builder.addCase(fetchPlants.pending, (state, action) => {
-      state.itemLoads = action.meta.requestStatus;
-    });
+    builder.addCase(fetchPlants.pending, (state, action) => {});
     builder.addCase(fetchPlants.fulfilled, (state, action) => {
-      state.itemLoads = action.meta.requestStatus;
       state.plants = action.payload;
     });
   },
 });
 
 export default plantsSlice;
-export const {} = plantsSlice.actions;
+export const { updatePlantTab } = plantsSlice.actions;

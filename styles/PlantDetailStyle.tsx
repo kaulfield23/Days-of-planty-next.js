@@ -35,4 +35,12 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     transform: 'translate(-50%, -50%)',
     paddingBottom: '30px',
   },
+  backParent: {
+    position: 'absolute',
+  },
+  back: {
+    position: 'relative',
+    top: '140%',
+    backgroundColor: 'beige',
+  },
 };

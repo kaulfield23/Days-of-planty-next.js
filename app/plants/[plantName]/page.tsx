@@ -2,6 +2,7 @@
 import {
   Box,
   Divider,
+  Fab,
   Tooltip,
   Typography,
   useMediaQuery,
@@ -23,6 +24,8 @@ import CategoryIndicator, {
   PlantCategoryEnum,
 } from 'components/features/plant/ColorIndicator';
 import PlantCondition from 'components/features/plant/PlantCondition';
+import BackButton from 'components/BackButton';
+import { useEffect } from 'react';
 
 const PlantDetail = () => {
   const plants = useAppSelector((state) => state.plantsReducer.plants);
@@ -32,18 +35,26 @@ const PlantDetail = () => {
   const theme = useTheme();
   const isMobileSize = useMediaQuery(theme.breakpoints.down('md'));
 
+  useEffect(() => {
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem('scrollPosition');
+    }
+  }, []);
+
   return (
     <>
       {plant !== undefined && (
         <Box sx={PlantDetailStyle.plantBox}>
           <Box sx={!isMobileSize ? PlantDetailStyle.context : {}}>
+            <BackButton />
             <Box sx={PlantDetailStyle.header}>
               <Image
                 src={`/static/img/${plant.imgName}.png`}
                 width={isMobileSize ? 300 : 400}
                 height={isMobileSize ? 400 : 500}
                 alt={plant?.name ?? 'empty'}
-                // sizes="100vw"
               />
             </Box>
             <Box sx={PlantDetailStyle.info}>
