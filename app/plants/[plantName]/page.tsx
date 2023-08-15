@@ -10,7 +10,7 @@ import {
   useTheme,
   Zoom,
 } from '@mui/material';
-import { useAppSelector } from 'redux/hooks';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
@@ -29,9 +29,11 @@ import CategoryIndicator, {
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
 import { useState } from 'react';
+import { fetchPlants } from 'redux/feature/plantSlice';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
+  const dispatch = useAppDispatch();
   const plants = useAppSelector((state) => state.plantsReducer.plants);
   const plantId = useSearchParams().get('plantId');
   const plant = plants.find((item) => item._id === plantId);
@@ -49,6 +51,7 @@ const PlantDetail = () => {
         },
         body: JSON.stringify(newValue),
       });
+      dispatch(fetchPlants());
     }
   };
 
@@ -85,6 +88,7 @@ const PlantDetail = () => {
                       variant="contained"
                       color="error"
                       size="small"
+                      onClick={() => handleCondition(-1)}
                       sx={{
                         ml: 2,
                         mb: 0.8,
