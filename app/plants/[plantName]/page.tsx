@@ -1,8 +1,8 @@
 'use client';
+
 import {
   Box,
   Divider,
-  Fab,
   Tooltip,
   Typography,
   useMediaQuery,
@@ -25,7 +25,6 @@ import CategoryIndicator, {
 } from 'components/features/plant/ColorIndicator';
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
-import { useEffect } from 'react';
 
 const PlantDetail = () => {
   const plants = useAppSelector((state) => state.plantsReducer.plants);
@@ -46,7 +45,7 @@ const PlantDetail = () => {
                 src={`/static/img/${plant.imgName}.png`}
                 width={isMobileSize ? 300 : 400}
                 height={isMobileSize ? 400 : 500}
-                alt={plant?.name ?? 'empty'}
+                alt={plant.name}
               />
             </Box>
             <Box sx={PlantDetailStyle.info}>
