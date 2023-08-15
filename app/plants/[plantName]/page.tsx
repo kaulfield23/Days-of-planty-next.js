@@ -2,11 +2,13 @@
 
 import {
   Box,
+  Button,
   Divider,
   Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
+  Zoom,
 } from '@mui/material';
 import { useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
@@ -18,6 +20,7 @@ import {
   LocalFloristOutlined,
   MacroOffOutlined,
   ShoppingCartTwoTone,
+  RemoveCircle,
 } from '@mui/icons-material';
 import PlantCareScale from 'components/features/plant/PlantCareScale';
 import CategoryIndicator, {
@@ -25,8 +28,10 @@ import CategoryIndicator, {
 } from 'components/features/plant/ColorIndicator';
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
+import { useState } from 'react';
 
 const PlantDetail = () => {
+  const [onEditMode, setOnEditMode] = useState(false);
   const plants = useAppSelector((state) => state.plantsReducer.plants);
   const plantId = useSearchParams().get('plantId');
   const plant = plants.find((item) => item._id === plantId);
@@ -49,13 +54,42 @@ const PlantDetail = () => {
               />
             </Box>
             <Box sx={PlantDetailStyle.info}>
-              <Typography
-                variant="h4"
-                sx={{ textTransform: 'capitalize', pt: 5 }}
-              >
-                {plant.name}
-              </Typography>
-              <PlantCondition condition={plant.condition} maxNum={5} />
+              <Box display="flex" justifyContent="center" alignItems="end">
+                <Typography
+                  variant="h4"
+                  sx={{
+                    textTransform: 'capitalize',
+                    pt: 5,
+                    transition: 'margin-left 0.4s ease-in-out',
+                    marginLeft: onEditMode ? '-20px' : '0',
+                  }}
+                >
+                  {plant.name}
+                </Typography>
+                {onEditMode && (
+                  <Zoom in={true}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      sx={{
+                        ml: 2,
+                        mb: 0.8,
+                        backgroundColor: '#f35858',
+                        color: 'white',
+                      }}
+                      endIcon={<RemoveCircle />}
+                    >
+                      Dead
+                    </Button>
+                  </Zoom>
+                )}
+              </Box>
+              <PlantCondition
+                condition={plant.condition}
+                maxNum={5}
+                onClickEdit={(value) => setOnEditMode(value)}
+              />
               <Typography
                 variant="h6"
                 sx={{ textTransform: 'capitalize', pt: 1 }}

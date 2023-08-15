@@ -1,67 +1,73 @@
+import { Box, ClickAwayListener, Tooltip, Typography } from '@mui/material';
 import {
-  Box,
-  ClickAwayListener,
-  IconButton,
-  Tooltip,
-  Typography,
-} from '@mui/material';
-import { Favorite, HeartBrokenOutlined, ModeEdit } from '@mui/icons-material';
+  Favorite,
+  HeartBrokenOutlined,
+  ModeEdit,
+  RemoveCircle,
+} from '@mui/icons-material';
 import { useState } from 'react';
 interface PlantConditionProps {
   condition: number;
   maxNum: number;
+  onClickEdit: (value) => void;
 }
-const PlantCondition = ({ condition, maxNum }: PlantConditionProps) => {
-  const [hoverIndex, setHoverIndex] = useState(0);
+const PlantCondition = ({
+  condition,
+  maxNum,
+  onClickEdit,
+}: PlantConditionProps) => {
+  const [hoverIndex, setHoverIndex] = useState(condition - 1);
   const [onEditMode, setOnEditMode] = useState(false);
 
   const handleCondition = (index: number) => {
-    console.log(index + 1);
     setHoverIndex(index);
   };
 
-  const hello = () => {
-    console.log('hello');
-  };
-
-  const bye = () => {
-    console.log('bye');
-  };
   const renderHearts = (index: number) => {
-    if (index < condition) {
+    if (onEditMode) {
       return (
         <Box
           onMouseOver={() => setHoverIndex(index)}
-          onMouseLeave={() => setHoverIndex(0)}
+          onMouseLeave={() => setHoverIndex(condition - 1)}
         >
-          <Favorite
-            sx={{
-              color: onEditMode && index < hoverIndex ? '#f35959' : '#4f755f',
-              cursor: onEditMode ? 'pointer' : '',
-              '&:hover': {
-                color: onEditMode && index <= hoverIndex ? '#f35959' : '',
-              },
-            }}
-            key={`heart-${index}`}
-            onClick={() => handleCondition(index)}
-          />
+          {onEditMode && index <= hoverIndex ? (
+            <Favorite
+              sx={{
+                color: '#4f755f',
+                cursor: onEditMode ? 'pointer' : '',
+              }}
+              key={`heart-${index}`}
+              onClick={() => handleCondition(index)}
+            />
+          ) : (
+            <HeartBrokenOutlined
+              sx={{
+                color: '#4f755f',
+                cursor: onEditMode ? 'pointer' : '',
+              }}
+              onClick={() => handleCondition(index)}
+            />
+          )}
         </Box>
       );
     } else {
-      return (
-        <Box
-          onMouseOver={() => setHoverIndex(index)}
-          onMouseLeave={() => setHoverIndex(0)}
-        >
-          <HeartBrokenOutlined
-            sx={{
-              color: onEditMode && index < hoverIndex ? '#f35959' : '#4f755f',
-              cursor: onEditMode ? 'pointer' : '',
-              '&:hover': { color: onEditMode ? '#f35959' : '' },
-            }}
-            onClick={() => handleCondition(index)}
-          />
-        </Box>
+      return index < condition ? (
+        <Favorite
+          sx={{
+            color: '#4f755f',
+            cursor: onEditMode ? 'pointer' : '',
+          }}
+          key={`heart-${index}`}
+          onClick={() => handleCondition(index)}
+        />
+      ) : (
+        <HeartBrokenOutlined
+          sx={{
+            color: '#4f755f',
+            cursor: onEditMode ? 'pointer' : '',
+          }}
+          onClick={() => handleCondition(index)}
+        />
       );
     }
   };
@@ -78,18 +84,28 @@ const PlantCondition = ({ condition, maxNum }: PlantConditionProps) => {
           ))}
         </>
       </Tooltip>
-      <ClickAwayListener onClickAway={() => setOnEditMode(false)}>
-        <Tooltip title="Edit">
-          <ModeEdit
-            sx={{
-              cursor: 'pointer',
-              ml: 1.5,
-              '&:hover': { color: '#8f50b9' },
-              color: onEditMode ? '#8f50b9' : '',
-            }}
-            onClick={() => setOnEditMode(true)}
-          />
-        </Tooltip>
+      <ClickAwayListener
+        onClickAway={() => {
+          setOnEditMode(false);
+          onClickEdit(false);
+        }}
+      >
+        <Box display="flex" alignItems="center">
+          <Tooltip title="Edit">
+            <ModeEdit
+              sx={{
+                cursor: 'pointer',
+                ml: 1.5,
+                '&:hover': { color: '#8f50b9' },
+                color: onEditMode ? '#8f50b9' : '',
+              }}
+              onClick={() => {
+                setOnEditMode(true);
+                onClickEdit(true);
+              }}
+            />
+          </Tooltip>
+        </Box>
       </ClickAwayListener>
     </Box>
   );
