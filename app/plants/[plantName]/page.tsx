@@ -39,6 +39,19 @@ const PlantDetail = () => {
   const theme = useTheme();
   const isMobileSize = useMediaQuery(theme.breakpoints.down('md'));
 
+  const handleCondition = (index: number) => {
+    if (onEditMode) {
+      const newValue = { plantId: plantId, newCondition: index + 1 };
+      fetch(`/api/plants`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newValue),
+      });
+    }
+  };
+
   return (
     <>
       {plant !== undefined && (
@@ -89,6 +102,7 @@ const PlantDetail = () => {
                 condition={plant.condition}
                 maxNum={5}
                 onClickEdit={(value) => setOnEditMode(value)}
+                onClickHeart={(value) => handleCondition(value)}
               />
               <Typography
                 variant="h6"

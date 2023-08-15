@@ -6,19 +6,17 @@ interface PlantConditionProps {
   condition: number;
   maxNum: number;
   onClickEdit: (value: boolean) => void;
+  onClickHeart: (value: number) => void;
 }
 
 const PlantCondition = ({
   condition,
   maxNum,
   onClickEdit,
+  onClickHeart,
 }: PlantConditionProps) => {
   const [hoverIndex, setHoverIndex] = useState(condition - 1);
   const [onEditMode, setOnEditMode] = useState(false);
-
-  const handleCondition = (index: number) => {
-    setHoverIndex(index);
-  };
 
   const iconStyle = (onEditMode: boolean) => {
     return { color: '#4f755f', cursor: onEditMode ? 'pointer' : '' };
@@ -35,12 +33,12 @@ const PlantCondition = ({
             <Favorite
               sx={iconStyle(onEditMode)}
               key={`heart-${index}`}
-              onClick={() => handleCondition(index)}
+              onClick={() => onClickHeart(index)}
             />
           ) : (
             <HeartBrokenOutlined
               sx={iconStyle(onEditMode)}
-              onClick={() => handleCondition(index)}
+              onClick={() => onClickHeart(index)}
             />
           )}
         </Box>
@@ -50,12 +48,12 @@ const PlantCondition = ({
         <Favorite
           sx={iconStyle(onEditMode)}
           key={`heart-${index}`}
-          onClick={() => handleCondition(index)}
+          onClick={() => onClickHeart(index)}
         />
       ) : (
         <HeartBrokenOutlined
           sx={iconStyle(onEditMode)}
-          onClick={() => handleCondition(index)}
+          onClick={() => onClickHeart(index)}
         />
       );
     }
