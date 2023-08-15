@@ -18,6 +18,12 @@ const Plants = () => {
 
   useEffect(() => {
     dispatch(fetchPlants());
+
+    const scrollPosition = sessionStorage.getItem('scrollPosition');
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition, 10));
+      sessionStorage.removeItem('scrollPosition');
+    }
   }, []);
 
   const plants = useAppSelector((state) => state.plantsReducer.plants);
