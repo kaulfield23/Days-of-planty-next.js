@@ -1,16 +1,13 @@
-import { Box, ClickAwayListener, Tooltip, Typography } from '@mui/material';
-import {
-  Favorite,
-  HeartBrokenOutlined,
-  ModeEdit,
-  RemoveCircle,
-} from '@mui/icons-material';
+import { Box, ClickAwayListener, SxProps, Theme, Tooltip } from '@mui/material';
+import { Favorite, HeartBrokenOutlined, ModeEdit } from '@mui/icons-material';
 import { useState } from 'react';
+
 interface PlantConditionProps {
   condition: number;
   maxNum: number;
-  onClickEdit: (value) => void;
+  onClickEdit: (value: boolean) => void;
 }
+
 const PlantCondition = ({
   condition,
   maxNum,
@@ -23,6 +20,10 @@ const PlantCondition = ({
     setHoverIndex(index);
   };
 
+  const iconStyle = (onEditMode: boolean) => {
+    return { color: '#4f755f', cursor: onEditMode ? 'pointer' : '' };
+  };
+
   const renderHearts = (index: number) => {
     if (onEditMode) {
       return (
@@ -32,19 +33,13 @@ const PlantCondition = ({
         >
           {onEditMode && index <= hoverIndex ? (
             <Favorite
-              sx={{
-                color: '#4f755f',
-                cursor: onEditMode ? 'pointer' : '',
-              }}
+              sx={iconStyle(onEditMode)}
               key={`heart-${index}`}
               onClick={() => handleCondition(index)}
             />
           ) : (
             <HeartBrokenOutlined
-              sx={{
-                color: '#4f755f',
-                cursor: onEditMode ? 'pointer' : '',
-              }}
+              sx={iconStyle(onEditMode)}
               onClick={() => handleCondition(index)}
             />
           )}
@@ -53,19 +48,13 @@ const PlantCondition = ({
     } else {
       return index < condition ? (
         <Favorite
-          sx={{
-            color: '#4f755f',
-            cursor: onEditMode ? 'pointer' : '',
-          }}
+          sx={iconStyle(onEditMode)}
           key={`heart-${index}`}
           onClick={() => handleCondition(index)}
         />
       ) : (
         <HeartBrokenOutlined
-          sx={{
-            color: '#4f755f',
-            cursor: onEditMode ? 'pointer' : '',
-          }}
+          sx={iconStyle(onEditMode)}
           onClick={() => handleCondition(index)}
         />
       );
