@@ -65,11 +65,11 @@ const PlantCondition = ({
         title="Condition"
         sx={{ display: 'flex', justifyContent: 'center' }}
       >
-        <>
+        <Box>
           {Array.from({ length: maxNum }, (_, index) => (
             <Box key={`heart-${index}`}>{renderHearts(index)}</Box>
           ))}
-        </>
+        </Box>
       </Tooltip>
       <ClickAwayListener
         onClickAway={() => {
