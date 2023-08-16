@@ -20,3 +20,19 @@ body {
   color: #ffffff;
   background-color: #8f50b9;
 }
+
+/* .react-datepicker-wrapper,
+.react-datepicker__input-container,
+.react-datepicker__input-container input {
+} */
+.react-datepicker__input-container input {
+  display: block;
+  height: 40px;
+  border-radius: 8px;
+  border: none;
+  padding: 10px;
+  width: 98px;
+}
+textarea {
+  resize: none;
+}
