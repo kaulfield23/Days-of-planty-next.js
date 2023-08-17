@@ -3,12 +3,10 @@ import { PlantsTypes } from 'utils/types';
 
 export interface PlantStoreSlice {
   plants: PlantsTypes[];
-  comments: [];
   plantTab: number;
 }
 const initialState: PlantStoreSlice = {
   plants: [],
-  comments: [],
   plantTab: 0,
 };
 

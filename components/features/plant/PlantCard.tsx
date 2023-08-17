@@ -10,7 +10,7 @@ import {
   useTheme,
 } from '@mui/material';
 import { PlantsTypes } from 'utils/types';
-import CategoryIndicator, { PlantCategoryEnum } from './ColorIndicator';
+import CategoryIndicator, { PlantCategoryEnum } from './CategoryIndicator';
 import Link from 'next/link';
 
 interface PlantCardProps {

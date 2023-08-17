@@ -5,16 +5,15 @@ import {
   TextareaAutosize,
   Button,
   TextField,
-  InputLabel,
   FormControl,
   Divider,
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
-import { PlantDetailStyle } from 'styles/PlantDetailStyle';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CalendarToday } from '@mui/icons-material';
 import { useState } from 'react';
+import { useSearchParams } from 'next/navigation';
 
 const StyledTextarea = styled(TextareaAutosize)(
   ({ theme }) => `
@@ -45,9 +44,35 @@ const StyledTextarea = styled(TextareaAutosize)(
     }
   `
 );
+type DiaryFormType = {
+  name: string;
+  date: Date | null;
+  content: string;
+  plantId: string | null;
+};
 
-const Comments = () => {
-  const [startDate, setStartDate] = useState<Date | null>(new Date());
+const DiaryForm = () => {
+  const plantId = useSearchParams().get('plantId');
+  const [diaryContent, setDiaryContent] = useState<DiaryFormType>({
+    name: '',
+    date: new Date(),
+    content: '',
+    plantId: plantId,
+  });
+
+  const handleAdd = () => {
+    fetch(`/api/diary`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(diaryContent),
+    }).then((res) => {
+      if (res.status === 200) {
+      }
+    });
+  };
+
   return (
     <Box>
       <Box sx={{ display: 'flex', flexDirection: 'column' }}>
@@ -65,6 +90,14 @@ const Comments = () => {
                   border: 'none',
                 }}
                 size="small"
+                onChange={(e) => {
+                  setTimeout(() => {
+                    setDiaryContent((prev) => ({
+                      ...prev,
+                      name: e.target.value,
+                    }));
+                  }, 500);
+                }}
               />
             </FormControl>
           </Box>
@@ -77,8 +110,13 @@ const Comments = () => {
                 </FormLabel>
               </Box>
               <DatePicker
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={new Date()}
+                onChange={(date) =>
+                  setDiaryContent((prev) => ({
+                    ...prev,
+                    date: date,
+                  }))
+                }
               />
             </FormControl>
           </Box>
@@ -98,15 +136,23 @@ const Comments = () => {
               minRows={3}
               maxLength={300}
               placeholder="Write about the plant here"
+              onChange={(e) => {
+                setTimeout(() => {
+                  setDiaryContent((prev) => ({
+                    ...prev,
+                    content: e.target.value.trim(),
+                  }));
+                }, 300);
+              }}
             />
             <Divider sx={{ mt: 1 }} />
             <Box>
               <Button
-                type="submit"
                 variant="contained"
                 sx={{ marginTop: 0.5, color: 'white' }}
+                onClick={handleAdd}
               >
-                Upload
+                Add
               </Button>
             </Box>
           </Box>
@@ -116,4 +162,4 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default DiaryForm;

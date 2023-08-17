@@ -5,10 +5,11 @@ interface ImageSchemaProps {
   contentType: { type: String; required: true };
   filename: { type: String; required: true };
 }
-interface CommentSchemaProps {
+interface DiarySchemaProps {
   name: { type: String; required: true; unique: true };
-  comment: { type: String; required: true };
+  content: { type: String; required: true };
   date: { type: Date; required: true };
+  plantId: { type: String };
 }
 export const imageSchema = new Schema<ImageSchemaProps>({
   image: Buffer,
@@ -16,8 +17,9 @@ export const imageSchema = new Schema<ImageSchemaProps>({
   filename: String,
 });
 
-export const commentSchema = new Schema<CommentSchemaProps>({
+export const diarySchema = new Schema<DiarySchemaProps>({
   name: String,
-  comment: String,
   date: Date,
+  content: String,
+  plantId: String,
 });

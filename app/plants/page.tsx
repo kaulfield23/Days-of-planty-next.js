@@ -17,7 +17,6 @@ const Plants = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    console.log('hey');
     dispatch(fetchPlants());
     const scrollPosition = sessionStorage.getItem('scrollPosition');
     if (scrollPosition) {

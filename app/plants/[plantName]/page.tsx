@@ -25,13 +25,13 @@ import {
 import PlantCareScale from 'components/features/plant/PlantCareScale';
 import CategoryIndicator, {
   PlantCategoryEnum,
-} from 'components/features/plant/ColorIndicator';
+} from 'components/features/plant/CategoryIndicator';
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
 import { useState } from 'react';
 import { fetchPlants } from 'redux/feature/plantSlice';
-import Diary from 'components/features/plant/Diary';
-import CommentBtn from 'components/features/plant/CommentBtn';
+import Diary from 'components/features/plant/diary/Diary';
+import DiaryBtn from 'components/features/plant/diary/DiaryBtn';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
@@ -52,8 +52,11 @@ const PlantDetail = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newValue),
+      }).then((res) => {
+        if (res.status === 200) {
+          dispatch(fetchPlants());
+        }
       });
-      dispatch(fetchPlants());
     }
   };
 
@@ -213,7 +216,7 @@ const PlantDetail = () => {
                 sx={{ bgcolor: 'white', mx: { xs: 0.8, sm: 2 } }}
               />
               <Diary />
-              <CommentBtn />
+              <DiaryBtn />
             </Box>
           </Box>
         </Box>
