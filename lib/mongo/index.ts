@@ -1,6 +1,6 @@
 import { MongoClient } from 'mongodb';
 
-const url = process.env.DB_URL;
+const url = process.env.NEXT_PUBLIC_DB_URL;
 
 if (!url) throw new Error('Please add your MongoDB url to .env.local');
 
@@ -12,7 +12,7 @@ let globalWithMongo = global as typeof globalThis & {
   _mongoClientPromise: Promise<MongoClient>;
 };
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NEXT_PUBLIC_NODE_ENV === 'development') {
   if (!globalWithMongo._mongoClientPromise) {
     client = new MongoClient(url);
     globalWithMongo._mongoClientPromise = client.connect();

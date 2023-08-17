@@ -1,6 +1,6 @@
 'use client';
 
-import { Box, Typography } from '@mui/material';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import plant from '/public/static/img/haejuplant-rv.png';
@@ -17,14 +17,14 @@ const Plants = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    console.log('hey');
     dispatch(fetchPlants());
-
     const scrollPosition = sessionStorage.getItem('scrollPosition');
     if (scrollPosition) {
       window.scrollTo(0, parseInt(scrollPosition, 10));
       sessionStorage.removeItem('scrollPosition');
     }
-  }, []);
+  }, [dispatch]);
 
   const plants = useAppSelector((state) => state.plantsReducer.plants);
 
@@ -71,7 +71,10 @@ const Plants = () => {
         />
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
-        <PlantTabs plants={plants} />
+        <>
+          {plants.length === 0 && <CircularProgress sx={{ mt: 3 }} />}
+          {plants.length !== 0 && <PlantTabs plants={plants} />}
+        </>
       </Box>
     </>
   );

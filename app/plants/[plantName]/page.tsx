@@ -71,7 +71,7 @@ const PlantDetail = () => {
                 alt={plant.name}
               />
             </Box>
-            <Box sx={PlantDetailStyle.info}>
+            <Box sx={PlantDetailStyle.infoBox}>
               <Box>
                 <Box display="flex" justifyContent="center" alignItems="end">
                   <Typography
@@ -118,7 +118,7 @@ const PlantDetail = () => {
                   Nickname: {plant.nickname}
                 </Typography>
                 <Box display="flex" justifyContent="center" sx={{ mt: 2 }}>
-                  <Box display="flex" justifyContent="space-around" width="50%">
+                  <Box display="flex" justifyContent="space-around">
                     <Box display="flex" flexDirection="column">
                       <Box display="flex" alignItems="center" sx={{ mb: 0.8 }}>
                         <WaterDrop

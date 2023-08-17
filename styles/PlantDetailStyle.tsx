@@ -6,17 +6,16 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     display: { xs: '', sm: '', md: 'flex', lg: 'flex' },
     alignItems: 'center',
     justifyContent: 'center',
-    // margin: '0 auto',
+    margin: '0 auto',
   },
   header: {
     display: 'flex',
     justifyContent: { xs: 'center', sm: 'flex-start' },
     position: 'relative',
-    left: { xs: '', sm: 30 },
+    left: { xs: '', sm: 85 },
     marginBottom: '-80px',
   },
-  info: {
-    width: { sm: '100%' },
+  infoBox: {
     backgroundColor: '#78b47d',
     margin: '20px auto',
     borderRadius: '6px',
@@ -26,18 +25,17 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     display: 'flex',
     flexDirection: { xs: 'column', sm: 'row' },
     alignItems: 'center',
+    maxHeight: { xs: 'none', sm: '500px', md: '600px' },
   },
   desc: {
-    width: '60%',
-    maxWidth: '500px',
+    width: '90%',
+    maxWidth: '600px',
     margin: '20px auto',
     textAlign: 'start',
   },
   context: {
-    margin: 'auto',
     paddingTop: '50px',
-    width: '80%',
-    maxWidth: '1300px',
+    maxWidth: '1400px',
     position: 'absolute',
   },
   contextMobile: {
