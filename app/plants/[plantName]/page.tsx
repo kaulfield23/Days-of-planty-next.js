@@ -30,8 +30,8 @@ import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
 import { useState } from 'react';
 import { fetchPlants } from 'redux/feature/plantSlice';
-import Comments from 'components/features/plant/Comments';
 import Diary from 'components/features/plant/Diary';
+import CommentBtn from 'components/features/plant/CommentBtn';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
@@ -61,7 +61,7 @@ const PlantDetail = () => {
     <>
       {plant !== undefined && (
         <Box sx={PlantDetailStyle.plantBox}>
-          <Box sx={!isMobileSize ? PlantDetailStyle.context : {}}>
+          <Box sx={!isMobileSize ? PlantDetailStyle.content : {}}>
             <BackButton />
             <Box sx={PlantDetailStyle.header}>
               <Image
@@ -213,6 +213,7 @@ const PlantDetail = () => {
                 sx={{ bgcolor: 'white', mx: { xs: 0.8, sm: 2 } }}
               />
               <Diary />
+              <CommentBtn />
             </Box>
           </Box>
         </Box>

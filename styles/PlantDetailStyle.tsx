@@ -11,8 +11,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
   header: {
     display: 'flex',
     justifyContent: { xs: 'center', sm: 'flex-start' },
-    position: 'relative',
-    left: { xs: '', sm: 85 },
+    marginLeft: { xs: '0', sm: '0', md: '0', lg: '85px' },
     marginBottom: '-80px',
   },
   infoBox: {
@@ -33,7 +32,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     margin: '20px auto',
     textAlign: 'start',
   },
-  context: {
+  content: {
     paddingTop: '50px',
     maxWidth: '1400px',
     position: 'absolute',

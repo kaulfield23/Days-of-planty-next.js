@@ -1,18 +1,15 @@
-import { Box, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import React from 'react';
+import { DiaryStyle } from 'styles/DiaryStyle';
 
 const Diary = () => {
   return (
-    <Box sx={{ maxWidth: '800px' }}>
-      <Box>
-        <Typography>
-          blah blah blah blah blah blah blah blahblah blah blah blahblah blah
-          blah blahblah blah blah blahblah blah blah blahblah blah blah blahblah
-          blah blah blah blah blah blah blah blah blah blah blahblah blah blah
-          blahblah blah blah blahblah blah blah blahblah blah blah blahblah blah
-          blah blahblah blah blah blah blahblah blah blah blah blah blah blah
-        </Typography>
-      </Box>
+    <Box sx={DiaryStyle.diaryBox}>
+      <Typography>
+        blah blah bah blah blah bah blah blah bah blah blah bahblah blah bah
+        blah blah bah blah blah bah blah blah bah blah blah bah blah blah bah
+        blah blah bahblah blah bah blah blah bah blah blah bah{' '}
+      </Typography>
     </Box>
   );
 };

@@ -1,4 +1,4 @@
-import { Box, ClickAwayListener, SxProps, Theme, Tooltip } from '@mui/material';
+import { Box, ClickAwayListener, Tooltip } from '@mui/material';
 import { Favorite, HeartBrokenOutlined, ModeEdit } from '@mui/icons-material';
 import { useState } from 'react';
 

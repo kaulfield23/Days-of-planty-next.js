@@ -72,8 +72,8 @@ const Plants = () => {
       </Box>
       <Box sx={{ mt: 15, textAlign: 'center' }}>
         <>
-          {plants.length === 0 && <CircularProgress sx={{ mt: 3 }} />}
-          {plants.length !== 0 && <PlantTabs plants={plants} />}
+          {plants === undefined && <CircularProgress sx={{ mt: 3 }} />}
+          {plants !== undefined && <PlantTabs plants={plants} />}
         </>
       </Box>
     </>
