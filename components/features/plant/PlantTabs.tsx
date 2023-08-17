@@ -6,7 +6,7 @@ import { updatePlantTab } from 'redux/feature/plantSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { PlantsTypes } from 'utils/types';
-import { PlantCategoryEnum } from './ColorIndicator';
+import { PlantCategoryEnum } from './CategoryIndicator';
 import PlantCard from './PlantCard';
 interface PlantTabsProps {
   plants: PlantsTypes[];

@@ -1,6 +1,8 @@
 import { model, models } from 'mongoose';
-import { imageSchema } from './shcema';
+import { diarySchema, imageSchema } from './shcema';
 
 const plantImages = models.plantImages || model('plantImages', imageSchema);
 
-export { plantImages };
+const plantDiary = models.plantDiary || model('plantDiary', diarySchema);
+
+export { plantImages, plantDiary };
