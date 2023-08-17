@@ -1,7 +1,6 @@
 import clientPromise from 'lib/mongo';
 import { plantDiary } from 'lib/mongo/models';
 import { diarySchema } from 'lib/mongo/shcema';
-// import { ObjectId } from 'mongodb';
 
 export async function POST(request: Request) {
   const client = await clientPromise;
@@ -13,7 +12,7 @@ export async function POST(request: Request) {
 
   try {
     await db.collection('diary').insertOne(diary);
-    return new Response('Patch succeeded', {
+    return new Response('Post succeeded', {
       status: 200,
     });
   } catch (e) {
