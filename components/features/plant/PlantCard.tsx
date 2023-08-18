@@ -31,45 +31,55 @@ const PlantCard = ({ plants }: PlantCardProps) => {
               ? plant.name.replace(' ', '_')
               : plant.name;
             return (
-              <Card sx={{ maxWidth: 350, padding: 1, m: 2 }} key={plant.name}>
-                <Link
-                  href={{
-                    pathname: `/plants/${fixedPath}`,
-                    query: { plantId: `${plant._id}` },
+              <Link
+                href={{
+                  pathname: `/plants/${fixedPath}`,
+                  query: { plantId: `${plant._id}` },
+                }}
+                onClick={() =>
+                  sessionStorage.setItem(
+                    'scrollPosition',
+                    `${window.pageYOffset}`
+                  )
+                }
+              >
+                <Card
+                  sx={{
+                    maxWidth: 350,
+                    p: 1,
+                    m: 1,
+                    height: '97%',
+                    '&:hover': {
+                      transition: 'background-color 0.4s ease-out',
+                      background: '#baf8f37f',
+                    },
                   }}
-                  onClick={() =>
-                    sessionStorage.setItem(
-                      'scrollPosition',
-                      `${window.pageYOffset}`
-                    )
-                  }
+                  key={plant.name}
                 >
-                  <CardActionArea>
-                    <CategoryIndicator
-                      plantCategory={plant.category as PlantCategoryEnum}
-                      height={20}
-                    />
-                    <CardMedia
-                      component="img"
-                      height={isMobileSize ? 350 : 450}
-                      image={`/static/img/${plant.imgName}.png`}
-                      alt={plant.name}
-                    />
-                    <CardContent>
-                      <Typography
-                        variant="h4"
-                        component="div"
-                        sx={{ textTransform: 'capitalize' }}
-                      >
-                        {plant.name}
-                      </Typography>
-                      <Typography variant="body1" color="text.secondary">
-                        {plant.desc}
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                </Link>
-              </Card>
+                  <CategoryIndicator
+                    plantCategory={plant.category as PlantCategoryEnum}
+                    height={20}
+                  />
+                  <CardMedia
+                    component="img"
+                    height={isMobileSize ? 350 : 450}
+                    image={`/static/img/${plant.imgName}.png`}
+                    alt={plant.name}
+                  />
+                  <CardContent>
+                    <Typography
+                      variant="h4"
+                      component="div"
+                      sx={{ textTransform: 'capitalize' }}
+                    >
+                      {plant.name}
+                    </Typography>
+                    <Typography variant="body1" color="text.secondary">
+                      {plant.desc}
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </Link>
             );
           })}
         </>
