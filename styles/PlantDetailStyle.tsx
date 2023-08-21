@@ -17,7 +17,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
   infoBox: {
     backgroundColor: '#78b47d',
     margin: '20px auto',
-    borderRadius: '6px',
+    borderRadius: { md: '6px' },
     color: 'white',
     textAlign: 'center',
     padding: 3,
@@ -33,7 +33,6 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     textAlign: 'start',
   },
   content: {
-    paddingTop: '50px',
     maxWidth: '1400px',
     position: 'absolute',
   },
@@ -47,6 +46,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
   back: {
     position: 'relative',
     margin: 3,
+    top: { sm: 0, md: '130px' },
     backgroundColor: 'beige',
   },
 };
