@@ -11,7 +11,7 @@ export const DiaryStyle: Record<string, SxProps<Theme> | undefined> = {
     scrollbarColor: '#6d6161 white',
     padding: '30px 10px',
     height: { md: '450px' },
-    minWidth: { xs: '360px', md: '400px', lg: '700px' },
+    minWidth: { xs: '85vw', md: '400px', lg: '700px' },
   },
   titleDate: {
     display: { xs: 'wrap', sm: 'flex' },
