@@ -80,7 +80,7 @@ const DiaryForm = () => {
           <Box display="flex" flexDirection="column">
             <FormControl required>
               <FormLabel sx={{ textAlign: 'start', color: 'white' }}>
-                Name
+                Title
               </FormLabel>
               <TextField
                 variant="outlined"

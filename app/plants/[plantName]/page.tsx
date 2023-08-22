@@ -75,7 +75,7 @@ const PlantDetail = () => {
               />
             </Box>
             <Box sx={PlantDetailStyle.infoBox}>
-              <Box>
+              <Box sx={PlantDetailStyle.info}>
                 <Box display="flex" justifyContent="center" alignItems="end">
                   <Typography
                     variant="h4"
@@ -213,9 +213,9 @@ const PlantDetail = () => {
                 orientation="vertical"
                 variant="middle"
                 flexItem
-                sx={{ bgcolor: 'white', mx: { xs: 0.8, sm: 2 } }}
+                sx={{ bgcolor: 'white', mx: { xs: 0.8, sm: 1 } }}
               />
-              <Diary />
+              <Diary plantId={plantId} />
               <DiaryBtn />
             </Box>
           </Box>

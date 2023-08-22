@@ -1,7 +1,6 @@
 import {
   Box,
   Card,
-  CardActionArea,
   CardContent,
   CardMedia,
   CircularProgress,
@@ -62,7 +61,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                   />
                   <CardMedia
                     component="img"
-                    height={isMobileSize ? 350 : 450}
+                    height={isMobileSize ? 300 : 450}
                     image={`/static/img/${plant.imgName}.png`}
                     alt={plant.name}
                   />

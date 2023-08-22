@@ -11,3 +11,11 @@ export type PlantsTypes = {
   category: string;
   imgName: string;
 };
+
+export type DiaryTypes = {
+  _id: {};
+  content: string;
+  date: Date;
+  name: string;
+  plantId: string;
+};
