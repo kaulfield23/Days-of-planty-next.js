@@ -8,9 +8,10 @@ const DiaryBtn = () => {
   return (
     <Box
       sx={{
-        position: { xs: '', sm: 'absolute' },
-        bottom: { xs: 0, sm: 40 },
-        right: { xs: 0, sm: 40 },
+        position: { xs: '', md: 'absolute' },
+        bottom: { xs: 0, md: 40 },
+        right: { xs: 0, md: 40 },
+        mt: 1,
       }}
     >
       <Button
