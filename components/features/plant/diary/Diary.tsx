@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { InfoOutlined } from '@mui/icons-material';
@@ -15,32 +15,30 @@ const Diary = ({ plantId }: DiaryProps) => {
   const [modalOpen, setModalOpen] = useState(false);
   const logList = useRef<null | HTMLDivElement>(null);
 
-  const fetchData = () => {
-    fetch(`/api/diary?plantId=${plantId}`, {
-      method: 'GET',
-    })
-      .then((res) => res.json())
-      .then((data) =>
-        setLogs(
-          data.map((item: DiaryTypes) => ({
-            _id: item._id,
-            content: item.content,
-            date: new Date(item.date),
-            name: item.name,
-            plantId: item.plantId,
-          }))
-        )
-      );
-  };
+  const fetchData = useCallback(async () => {
+    const res = await fetch(`/api/diary?plantId=${plantId}`, { method: 'GET' });
+    const data = await res.json();
+    setLogs(
+      data.map((item: DiaryTypes) => ({
+        _id: item._id,
+        content: item.content,
+        date: new Date(item.date),
+        name: item.name,
+        plantId: item.plantId,
+      }))
+    );
+  }, [plantId]);
+
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const sortedLogs = useMemo(() => {
+    console.log('hey');
     if (logs !== undefined) {
       return logs.sort((a, b) => b.date.getTime() - a.date.getTime());
     }
-  }, [logs?.length]);
+  }, [logs]);
 
   const scrollUp = () => {
     logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });

@@ -32,7 +32,7 @@ const PlantAvatar = ({ pic, review, name, bgColor }: PlantAvatarProps) => {
           }}
         />
         <Box>
-          <Typography variant="h6">"{review}"</Typography>
+          <Typography variant="h6">{`"${review}"`}</Typography>
           <Typography variant="subtitle1">- {name}</Typography>
         </Box>
       </Box>
