@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { InfoOutlined } from '@mui/icons-material';
@@ -36,9 +36,11 @@ const Diary = ({ plantId }: DiaryProps) => {
     fetchData();
   }, []);
 
-  if (logs !== undefined) {
-    logs.sort((a, b) => b.date.getTime() - a.date.getTime());
-  }
+  const sortedLogs = useMemo(() => {
+    if (logs !== undefined) {
+      return logs.sort((a, b) => b.date.getTime() - a.date.getTime());
+    }
+  }, [logs?.length]);
 
   const scrollUp = () => {
     logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });
@@ -46,22 +48,14 @@ const Diary = ({ plantId }: DiaryProps) => {
 
   return (
     <Box>
-      {logs === undefined && (
+      {sortedLogs === undefined && (
         <Box width="300px">
           <CircularProgress sx={{ color: 'white' }} />
         </Box>
       )}
-      {logs !== undefined && (
+      {sortedLogs !== undefined && (
         <>
-          {logs.length === 0 && (
-            <Box sx={DiaryStyle.zeroLog}>
-              <InfoOutlined sx={{ fontSize: '50px', mb: 2 }} />
-              <Typography variant="h5">
-                No logs to display. Please write a diary about this plant
-              </Typography>
-            </Box>
-          )}
-          {logs.length !== 0 && (
+          {sortedLogs.length !== 0 && (
             <Box sx={DiaryStyle.diarySection}>
               <Typography
                 variant="h4"
@@ -71,7 +65,7 @@ const Diary = ({ plantId }: DiaryProps) => {
                 Log
               </Typography>
               <Box sx={DiaryStyle.logBox} ref={logList}>
-                {logs.map((log, index) => {
+                {sortedLogs.map((log, index) => {
                   return (
                     <Box
                       sx={{
@@ -107,6 +101,14 @@ const Diary = ({ plantId }: DiaryProps) => {
                   }}
                 />
               )}
+            </Box>
+          )}
+          {sortedLogs.length === 0 && (
+            <Box sx={DiaryStyle.zeroLog}>
+              <InfoOutlined sx={{ fontSize: '50px', mb: 2 }} />
+              <Typography variant="h5">
+                No logs to display. Please write a diary about this plant
+              </Typography>
             </Box>
           )}
         </>
