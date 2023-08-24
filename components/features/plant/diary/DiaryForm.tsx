@@ -62,6 +62,7 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
   const plantId = useSearchParams().get('plantId');
   const [charNum, setCharNum] = useState(0);
   const [showDiaryForm, setShowDiaryForm] = useState(true);
+  const [startDate, setStartDate] = useState(new Date());
   const [diaryContent, setDiaryContent] = useState<DiaryFormType>({
     name: '',
     date: new Date(),
@@ -127,13 +128,14 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                   </FormLabel>
                 </Box>
                 <DatePicker
-                  selected={new Date()}
-                  onChange={(date) =>
+                  selected={startDate}
+                  onChange={(date) => {
                     setDiaryContent((prev) => ({
                       ...prev,
                       date: date,
-                    }))
-                  }
+                    }));
+                    setStartDate(date!);
+                  }}
                 />
               </FormControl>
             </Box>
