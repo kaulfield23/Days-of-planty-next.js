@@ -8,11 +8,12 @@ import {
   FormControl,
   Divider,
   Typography,
+  Fade,
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarToday, WarningAmber } from '@mui/icons-material';
+import { CalendarToday, WarningAmber, InfoRounded } from '@mui/icons-material';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
@@ -59,6 +60,7 @@ interface DiaryFormProps {
 
 const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
   const plantId = useSearchParams().get('plantId');
+  const [charNum, setCharNum] = useState(0);
   const [showDiaryForm, setShowDiaryForm] = useState(true);
   const [diaryContent, setDiaryContent] = useState<DiaryFormType>({
     name: '',
@@ -68,20 +70,22 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
   });
 
   const handleAdd = () => {
-    fetch(`/api/diary`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(diaryContent),
-    }).then((res) => {
-      if (res.status === 200) {
-        onClickClose();
-        onDataAdd();
-      } else {
-        setShowDiaryForm(false);
-      }
-    });
+    if (diaryContent.name !== '' && diaryContent.content !== '') {
+      fetch(`/api/diary`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(diaryContent),
+      }).then((res) => {
+        if (res.status === 200) {
+          onClickClose();
+          onDataAdd();
+        } else {
+          setShowDiaryForm(false);
+        }
+      });
+    }
   };
 
   return (
@@ -101,6 +105,7 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                     borderRadius: '8px',
                     border: 'none',
                   }}
+                  inputProps={{ maxLength: 40 }}
                   size="small"
                   onChange={(e) => {
                     setTimeout(() => {
@@ -146,9 +151,10 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
             >
               <StyledTextarea
                 minRows={3}
-                maxLength={300}
+                maxLength={350}
                 placeholder="Write about the plant here"
                 onChange={(e) => {
+                  setCharNum(e.target.value.length);
                   setTimeout(() => {
                     setDiaryContent((prev) => ({
                       ...prev,
@@ -158,7 +164,8 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                 }}
               />
               <Divider sx={{ mt: 1 }} />
-              <Box>
+              <Box display="flex" justifyContent="space-between">
+                <Typography>{`${charNum} / 350`}</Typography>
                 <Button
                   variant="contained"
                   sx={{ marginTop: 0.5, color: 'white' }}
@@ -168,6 +175,14 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                 </Button>
               </Box>
             </Box>
+            <Fade in={diaryContent.name === '' || diaryContent.content === ''}>
+              <Box display="flex" alignItems="center">
+                <InfoRounded sx={{ color: 'orange' }} />
+                <Typography variant="h6" color="white">
+                  Please fill out the form
+                </Typography>
+              </Box>
+            </Fade>
           </FormControl>
         </Box>
       )}
