@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { InfoOutlined } from '@mui/icons-material';
+import DiaryBtn from './DiaryBtn';
+import DiaryFormModal from './DiaryFormModal';
 
 interface DiaryProps {
   plantId: string | null;
@@ -10,8 +12,9 @@ interface DiaryProps {
 
 const Diary = ({ plantId }: DiaryProps) => {
   const [logs, setLogs] = useState<DiaryTypes[]>();
+  const [modalOpen, setModalOpen] = useState(false);
 
-  useEffect(() => {
+  const fetchData = () => {
     fetch(`/api/diary?plantId=${plantId}`, {
       method: 'GET',
     })
@@ -27,6 +30,9 @@ const Diary = ({ plantId }: DiaryProps) => {
           }))
         )
       );
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
 
   if (logs !== undefined) {
@@ -85,6 +91,14 @@ const Diary = ({ plantId }: DiaryProps) => {
                 })}
                 <Typography variant="h2"></Typography>
               </Box>
+              <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
+              {modalOpen && (
+                <DiaryFormModal
+                  open={modalOpen}
+                  onClickClose={() => setModalOpen(false)}
+                  onDataAdd={fetchData}
+                />
+              )}
             </Box>
           )}
         </>

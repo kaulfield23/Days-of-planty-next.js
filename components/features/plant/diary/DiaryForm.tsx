@@ -7,11 +7,12 @@ import {
   TextField,
   FormControl,
   Divider,
+  Typography,
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { CalendarToday } from '@mui/icons-material';
+import { CalendarToday, WarningAmber } from '@mui/icons-material';
 import { useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
@@ -51,8 +52,14 @@ type DiaryFormType = {
   plantId: string | null;
 };
 
-const DiaryForm = () => {
+interface DiaryFormProps {
+  onClickClose: () => void;
+  onDataAdd: () => void;
+}
+
+const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
   const plantId = useSearchParams().get('plantId');
+  const [showDiaryForm, setShowDiaryForm] = useState(true);
   const [diaryContent, setDiaryContent] = useState<DiaryFormType>({
     name: '',
     date: new Date(),
@@ -69,95 +76,117 @@ const DiaryForm = () => {
       body: JSON.stringify(diaryContent),
     }).then((res) => {
       if (res.status === 200) {
+        onClickClose();
+        onDataAdd();
+      } else {
+        setShowDiaryForm(false);
       }
     });
   };
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <Box display="flex">
-          <Box display="flex" flexDirection="column">
-            <FormControl required>
-              <FormLabel sx={{ textAlign: 'start', color: 'white' }}>
-                Title
-              </FormLabel>
-              <TextField
-                variant="outlined"
-                sx={{
-                  backgroundColor: 'white',
-                  borderRadius: '8px',
-                  border: 'none',
-                }}
-                size="small"
+      {showDiaryForm && (
+        <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+          <Box display="flex">
+            <Box display="flex" flexDirection="column">
+              <FormControl required>
+                <FormLabel sx={{ textAlign: 'start', color: 'white' }}>
+                  Title
+                </FormLabel>
+                <TextField
+                  variant="outlined"
+                  sx={{
+                    backgroundColor: 'white',
+                    borderRadius: '8px',
+                    border: 'none',
+                  }}
+                  size="small"
+                  onChange={(e) => {
+                    setTimeout(() => {
+                      setDiaryContent((prev) => ({
+                        ...prev,
+                        name: e.target.value,
+                      }));
+                    }, 500);
+                  }}
+                />
+              </FormControl>
+            </Box>
+            <Box display="flex" flexDirection="column" sx={{ ml: 0.8 }}>
+              <FormControl required>
+                <Box display="flex">
+                  <CalendarToday sx={{ fontSize: '20px', mr: 0.7 }} />
+                  <FormLabel sx={{ textAlign: 'start', color: 'white' }}>
+                    Date
+                  </FormLabel>
+                </Box>
+                <DatePicker
+                  selected={new Date()}
+                  onChange={(date) =>
+                    setDiaryContent((prev) => ({
+                      ...prev,
+                      date: date,
+                    }))
+                  }
+                />
+              </FormControl>
+            </Box>
+          </Box>
+          <FormControl required>
+            <FormLabel sx={{ textAlign: 'start', color: 'white', mt: 2 }}>
+              Diary
+            </FormLabel>
+            <Box
+              sx={{
+                backgroundColor: 'white',
+                borderRadius: '8px',
+                padding: '10px',
+              }}
+            >
+              <StyledTextarea
+                minRows={3}
+                maxLength={300}
+                placeholder="Write about the plant here"
                 onChange={(e) => {
                   setTimeout(() => {
                     setDiaryContent((prev) => ({
                       ...prev,
-                      name: e.target.value,
+                      content: e.target.value.trim(),
                     }));
-                  }, 500);
+                  }, 300);
                 }}
               />
-            </FormControl>
-          </Box>
-          <Box display="flex" flexDirection="column" sx={{ ml: 0.8 }}>
-            <FormControl required>
-              <Box display="flex">
-                <CalendarToday sx={{ fontSize: '20px', mr: 0.7 }} />
-                <FormLabel sx={{ textAlign: 'start', color: 'white' }}>
-                  Date
-                </FormLabel>
+              <Divider sx={{ mt: 1 }} />
+              <Box>
+                <Button
+                  variant="contained"
+                  sx={{ marginTop: 0.5, color: 'white' }}
+                  onClick={handleAdd}
+                >
+                  Add
+                </Button>
               </Box>
-              <DatePicker
-                selected={new Date()}
-                onChange={(date) =>
-                  setDiaryContent((prev) => ({
-                    ...prev,
-                    date: date,
-                  }))
-                }
-              />
-            </FormControl>
-          </Box>
-        </Box>
-        <FormControl required>
-          <FormLabel sx={{ textAlign: 'start', color: 'white', mt: 2 }}>
-            Diary
-          </FormLabel>
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              borderRadius: '8px',
-              padding: '10px',
-            }}
-          >
-            <StyledTextarea
-              minRows={3}
-              maxLength={300}
-              placeholder="Write about the plant here"
-              onChange={(e) => {
-                setTimeout(() => {
-                  setDiaryContent((prev) => ({
-                    ...prev,
-                    content: e.target.value.trim(),
-                  }));
-                }, 300);
-              }}
-            />
-            <Divider sx={{ mt: 1 }} />
-            <Box>
-              <Button
-                variant="contained"
-                sx={{ marginTop: 0.5, color: 'white' }}
-                onClick={handleAdd}
-              >
-                Add
-              </Button>
             </Box>
-          </Box>
-        </FormControl>
-      </Box>
+          </FormControl>
+        </Box>
+      )}
+      {!showDiaryForm && (
+        <Box sx={{ textAlign: 'center' }}>
+          <WarningAmber sx={{ fontSize: '30px', color: 'orange' }} />
+          <Typography variant="h3" sx={{ color: 'white' }}>
+            Something went wrong. Please try again
+          </Typography>
+          <Button
+            variant="contained"
+            color="info"
+            sx={{ mt: 2 }}
+            onClick={() => setShowDiaryForm(true)}
+          >
+            Try again
+          </Button>
+        </Box>
+      )}
     </Box>
   );
 };

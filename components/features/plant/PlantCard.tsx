@@ -41,6 +41,7 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                     `${window.pageYOffset}`
                   )
                 }
+                key={plant.name}
               >
                 <Card
                   sx={{
@@ -53,7 +54,6 @@ const PlantCard = ({ plants }: PlantCardProps) => {
                       background: '#baf8f37f',
                     },
                   }}
-                  key={plant.name}
                 >
                   <CategoryIndicator
                     plantCategory={plant.category as PlantCategoryEnum}
