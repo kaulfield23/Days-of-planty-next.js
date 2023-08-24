@@ -12,7 +12,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     display: 'flex',
     justifyContent: { xs: 'center', sm: 'center', md: 'flex-start' },
     marginLeft: { xs: '0', sm: '0', md: '80px', lg: '130px' },
-    marginBottom: '-85px',
+    marginBottom: '-105px',
   },
   infoBox: {
     backgroundColor: '#78b47d',

@@ -1,8 +1,10 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { InfoOutlined } from '@mui/icons-material';
+import DiaryBtn from './DiaryBtn';
+import DiaryFormModal from './DiaryFormModal';
 
 interface DiaryProps {
   plantId: string | null;
@@ -10,8 +12,10 @@ interface DiaryProps {
 
 const Diary = ({ plantId }: DiaryProps) => {
   const [logs, setLogs] = useState<DiaryTypes[]>();
+  const [modalOpen, setModalOpen] = useState(false);
+  const logList = useRef<null | HTMLDivElement>(null);
 
-  useEffect(() => {
+  const fetchData = () => {
     fetch(`/api/diary?plantId=${plantId}`, {
       method: 'GET',
     })
@@ -27,30 +31,31 @@ const Diary = ({ plantId }: DiaryProps) => {
           }))
         )
       );
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
 
-  if (logs !== undefined) {
-    logs.sort((a, b) => b.date.getTime() - a.date.getTime());
-  }
+  const sortedLogs = useMemo(() => {
+    if (logs !== undefined) {
+      return logs.sort((a, b) => b.date.getTime() - a.date.getTime());
+    }
+  }, [logs?.length]);
+
+  const scrollUp = () => {
+    logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <Box>
-      {logs === undefined && (
+      {sortedLogs === undefined && (
         <Box width="300px">
           <CircularProgress sx={{ color: 'white' }} />
         </Box>
       )}
-      {logs !== undefined && (
+      {sortedLogs !== undefined && (
         <>
-          {logs.length === 0 && (
-            <Box sx={DiaryStyle.zeroLog}>
-              <InfoOutlined sx={{ fontSize: '50px', mb: 2 }} />
-              <Typography variant="h5">
-                No logs to display. Please write a diary about this plant
-              </Typography>
-            </Box>
-          )}
-          {logs.length !== 0 && (
+          {sortedLogs.length !== 0 && (
             <Box sx={DiaryStyle.diarySection}>
               <Typography
                 variant="h4"
@@ -59,8 +64,8 @@ const Diary = ({ plantId }: DiaryProps) => {
               >
                 Log
               </Typography>
-              <Box sx={DiaryStyle.logBox}>
-                {logs.map((log, index) => {
+              <Box sx={DiaryStyle.logBox} ref={logList}>
+                {sortedLogs.map((log, index) => {
                   return (
                     <Box
                       sx={{
@@ -85,6 +90,25 @@ const Diary = ({ plantId }: DiaryProps) => {
                 })}
                 <Typography variant="h2"></Typography>
               </Box>
+              <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
+              {modalOpen && (
+                <DiaryFormModal
+                  open={modalOpen}
+                  onClickClose={() => setModalOpen(false)}
+                  onDataAdd={() => {
+                    fetchData();
+                    scrollUp();
+                  }}
+                />
+              )}
+            </Box>
+          )}
+          {sortedLogs.length === 0 && (
+            <Box sx={DiaryStyle.zeroLog}>
+              <InfoOutlined sx={{ fontSize: '50px', mb: 2 }} />
+              <Typography variant="h5">
+                No logs to display. Please write a diary about this plant
+              </Typography>
             </Box>
           )}
         </>

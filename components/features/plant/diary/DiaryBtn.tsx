@@ -1,10 +1,11 @@
 import { Button, Box } from '@mui/material';
 import AddIcon from '@mui/icons-material/Add';
-import { useState } from 'react';
-import DiaryFormModal from './DiaryFormModal';
 
-const DiaryBtn = () => {
-  const [open, setOpen] = useState(false);
+interface DiaryBtnProps {
+  onClickWriteDiary: () => void;
+}
+
+const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
   return (
     <Box
       sx={{
@@ -23,13 +24,10 @@ const DiaryBtn = () => {
           color: 'white',
           fontWeight: 'bold',
         }}
-        onClick={() => setOpen(true)}
+        onClick={onClickWriteDiary}
       >
         Write diary
       </Button>
-      {open && (
-        <DiaryFormModal open={open} onClickClose={() => setOpen(false)} />
-      )}
     </Box>
   );
 };

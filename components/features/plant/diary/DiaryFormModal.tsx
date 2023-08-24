@@ -1,12 +1,12 @@
 import { Box, Modal } from '@mui/material';
-import React from 'react';
 import DiaryForm from './DiaryForm';
 interface DiaryModalProps {
   open: boolean;
   onClickClose: () => void;
+  onDataAdd: () => void;
 }
 
-const DiaryFormModal = ({ open, onClickClose }: DiaryModalProps) => {
+const DiaryFormModal = ({ open, onClickClose, onDataAdd }: DiaryModalProps) => {
   const style = {
     position: 'absolute' as 'absolute',
     top: '50%',
@@ -16,7 +16,9 @@ const DiaryFormModal = ({ open, onClickClose }: DiaryModalProps) => {
     maxWidth: '700px',
     bgcolor: '#968282',
     padding: '50px 10px',
+    minHeight: '300px',
   };
+
   return (
     <Modal
       open={open}
@@ -25,7 +27,7 @@ const DiaryFormModal = ({ open, onClickClose }: DiaryModalProps) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
-        <DiaryForm />
+        <DiaryForm onClickClose={onClickClose} onDataAdd={onDataAdd} />
       </Box>
     </Modal>
   );

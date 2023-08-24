@@ -31,7 +31,6 @@ import BackButton from 'components/BackButton';
 import { useState } from 'react';
 import { fetchPlants } from 'redux/feature/plantSlice';
 import Diary from 'components/features/plant/diary/Diary';
-import DiaryBtn from 'components/features/plant/diary/DiaryBtn';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
@@ -216,7 +215,6 @@ const PlantDetail = () => {
                 sx={{ bgcolor: 'white', mx: { xs: 0.8, sm: 1 } }}
               />
               <Diary plantId={plantId} />
-              <DiaryBtn />
             </Box>
           </Box>
         </Box>
