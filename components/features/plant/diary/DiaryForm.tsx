@@ -60,6 +60,7 @@ interface DiaryFormProps {
 
 const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
   const plantId = useSearchParams().get('plantId');
+  const [charNum, setCharNum] = useState(0);
   const [showDiaryForm, setShowDiaryForm] = useState(true);
   const [diaryContent, setDiaryContent] = useState<DiaryFormType>({
     name: '',
@@ -104,6 +105,7 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                     borderRadius: '8px',
                     border: 'none',
                   }}
+                  inputProps={{ maxLength: 40 }}
                   size="small"
                   onChange={(e) => {
                     setTimeout(() => {
@@ -149,9 +151,10 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
             >
               <StyledTextarea
                 minRows={3}
-                maxLength={300}
+                maxLength={350}
                 placeholder="Write about the plant here"
                 onChange={(e) => {
+                  setCharNum(e.target.value.length);
                   setTimeout(() => {
                     setDiaryContent((prev) => ({
                       ...prev,
@@ -161,7 +164,8 @@ const DiaryForm = ({ onClickClose, onDataAdd }: DiaryFormProps) => {
                 }}
               />
               <Divider sx={{ mt: 1 }} />
-              <Box>
+              <Box display="flex" justifyContent="space-between">
+                <Typography>{`${charNum} / 350`}</Typography>
                 <Button
                   variant="contained"
                   sx={{ marginTop: 0.5, color: 'white' }}

@@ -34,7 +34,6 @@ const Diary = ({ plantId }: DiaryProps) => {
   }, [fetchData]);
 
   const sortedLogs = useMemo(() => {
-    console.log('hey');
     if (logs !== undefined) {
       return logs.sort((a, b) => b.date.getTime() - a.date.getTime());
     }
@@ -88,17 +87,6 @@ const Diary = ({ plantId }: DiaryProps) => {
                 })}
                 <Typography variant="h2"></Typography>
               </Box>
-              <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
-              {modalOpen && (
-                <DiaryFormModal
-                  open={modalOpen}
-                  onClickClose={() => setModalOpen(false)}
-                  onDataAdd={() => {
-                    fetchData();
-                    scrollUp();
-                  }}
-                />
-              )}
             </Box>
           )}
           {sortedLogs.length === 0 && (
@@ -109,7 +97,18 @@ const Diary = ({ plantId }: DiaryProps) => {
               </Typography>
             </Box>
           )}
+          <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
         </>
+      )}
+      {modalOpen && (
+        <DiaryFormModal
+          open={modalOpen}
+          onClickClose={() => setModalOpen(false)}
+          onDataAdd={() => {
+            fetchData();
+            scrollUp();
+          }}
+        />
       )}
     </Box>
   );
