@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { InfoOutlined } from '@mui/icons-material';
@@ -13,6 +13,7 @@ interface DiaryProps {
 const Diary = ({ plantId }: DiaryProps) => {
   const [logs, setLogs] = useState<DiaryTypes[]>();
   const [modalOpen, setModalOpen] = useState(false);
+  const logList = useRef<null | HTMLDivElement>(null);
 
   const fetchData = () => {
     fetch(`/api/diary?plantId=${plantId}`, {
@@ -38,6 +39,10 @@ const Diary = ({ plantId }: DiaryProps) => {
   if (logs !== undefined) {
     logs.sort((a, b) => b.date.getTime() - a.date.getTime());
   }
+
+  const scrollUp = () => {
+    logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <Box>
@@ -65,7 +70,7 @@ const Diary = ({ plantId }: DiaryProps) => {
               >
                 Log
               </Typography>
-              <Box sx={DiaryStyle.logBox}>
+              <Box sx={DiaryStyle.logBox} ref={logList}>
                 {logs.map((log, index) => {
                   return (
                     <Box
@@ -96,7 +101,10 @@ const Diary = ({ plantId }: DiaryProps) => {
                 <DiaryFormModal
                   open={modalOpen}
                   onClickClose={() => setModalOpen(false)}
-                  onDataAdd={fetchData}
+                  onDataAdd={() => {
+                    fetchData();
+                    scrollUp();
+                  }}
                 />
               )}
             </Box>
