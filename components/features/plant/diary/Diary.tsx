@@ -44,7 +44,7 @@ const Diary = ({ plantId }: DiaryProps) => {
   };
 
   return (
-    <Box>
+    <Box sx={{ backgroundColor: 'salmon' }}>
       {sortedLogs === undefined && (
         <Box width="300px">
           <CircularProgress sx={{ color: 'white' }} />
