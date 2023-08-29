@@ -28,7 +28,7 @@ export const DiaryStyle: Record<string, SxProps<Theme> | undefined> = {
     justifyContent: 'center',
     alignItems: 'center',
     height: '300px',
-    width: '400px',
+    width: '300px',
     backgroundColor: '#6d61612a',
     textAlign: 'center',
     ml: { xs: 0, md: 2 },

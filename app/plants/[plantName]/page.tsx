@@ -69,6 +69,8 @@ const PlantDetail = () => {
               <Typography
                 variant="h4"
                 sx={{
+                  fontSize: { xs: '25px', sm: '30px' },
+                  maxWidth: { xs: '250px', sm: '500px' },
                   textTransform: 'capitalize',
                   transition: 'margin-left 0.4s ease-in-out',
                   marginLeft: onEditMode ? '-20px' : '0',
