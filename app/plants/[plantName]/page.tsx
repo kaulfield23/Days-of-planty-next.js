@@ -49,7 +49,6 @@ const PlantDetail = () => {
 
   return (
     <Box sx={PlantDetailStyle.plantBox}>
-      <BackButton />
       {plant !== undefined && (
         <Box
           sx={{
@@ -58,6 +57,7 @@ const PlantDetail = () => {
             justifyContent: 'center',
           }}
         >
+          <BackButton />
           <Box sx={PlantDetailStyle.plantInfo}>
             <Image
               src={`/static/img/${plant.imgName}.png`}

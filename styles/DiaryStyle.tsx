@@ -5,11 +5,10 @@ export const DiaryStyle: Record<string, SxProps<Theme> | undefined> = {
     textAlign: 'start',
     borderRadius: '3px',
     backgroundColor: '#f5f5f5',
-    width: '80vw',
+    width: { xs: '95vw', md: '80vw' },
     maxWidth: '700px',
     height: '93vh',
     maxHeight: '1550px',
-    ml: 2,
   },
   logBox: {
     overflow: 'auto',
@@ -32,7 +31,7 @@ export const DiaryStyle: Record<string, SxProps<Theme> | undefined> = {
     width: '400px',
     backgroundColor: '#6d61612a',
     textAlign: 'center',
-    ml: 2,
+    ml: { xs: 0, md: 2 },
     p: 2,
   },
 };

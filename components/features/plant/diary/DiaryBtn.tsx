@@ -11,7 +11,8 @@ const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
       sx={{
         display: 'flex',
         justifyContent: 'center',
-        mt: -6,
+        mt: { xl: -6 },
+        mb: 2,
       }}
     >
       <Button
