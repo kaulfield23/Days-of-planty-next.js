@@ -9,10 +9,9 @@ const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
   return (
     <Box
       sx={{
-        position: { xs: '', md: 'absolute' },
-        bottom: { xs: 0, md: 40 },
-        right: { xs: 0, md: 40 },
-        mt: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        mt: -6,
       }}
     >
       <Button

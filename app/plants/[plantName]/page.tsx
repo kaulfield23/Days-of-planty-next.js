@@ -3,8 +3,6 @@
 import {
   Box,
   Button,
-  Divider,
-  Tooltip,
   Typography,
   useMediaQuery,
   useTheme,
@@ -14,18 +12,7 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
-import {
-  WaterDrop,
-  WbSunny,
-  LocalFloristOutlined,
-  MacroOffOutlined,
-  ShoppingCartTwoTone,
-  RemoveCircle,
-} from '@mui/icons-material';
-import PlantCareScale from 'components/features/plant/PlantCareScale';
-import CategoryIndicator, {
-  PlantCategoryEnum,
-} from 'components/features/plant/CategoryIndicator';
+import { RemoveCircle } from '@mui/icons-material';
 import PlantCondition from 'components/features/plant/PlantCondition';
 import BackButton from 'components/BackButton';
 import { useState } from 'react';
@@ -64,13 +51,14 @@ const PlantDetail = () => {
     <Box sx={PlantDetailStyle.plantBox}>
       <BackButton />
       {plant !== undefined && (
-        <Box sx={PlantDetailStyle.plantInfo}>
-          <Box
-            sx={{
-              backgroundColor: 'white',
-              textAlign: 'center',
-            }}
-          >
+        <Box
+          sx={{
+            display: { xl: 'flex' },
+            flexDirection: { xs: 'column', xl: 'row' },
+            justifyContent: 'center',
+          }}
+        >
+          <Box sx={PlantDetailStyle.plantInfo}>
             <Image
               src={`/static/img/${plant.imgName}.png`}
               width={isMobileSize ? 300 : 400}
@@ -82,7 +70,6 @@ const PlantDetail = () => {
                 variant="h4"
                 sx={{
                   textTransform: 'capitalize',
-                  pt: 5,
                   transition: 'margin-left 0.4s ease-in-out',
                   marginLeft: onEditMode ? '-20px' : '0',
                 }}
@@ -132,16 +119,8 @@ const PlantDetail = () => {
               <Typography sx={{ fontSize: '20px' }}>{plant.desc}</Typography>
             </Box>
           </Box>
-          <Box
-            sx={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              margin: '0 auto',
-              backgroundColor: 'salmon',
-            }}
-          >
-            {/* <Diary plantId={plantId} /> */}
+          <Box sx={PlantDetailStyle.logBox}>
+            <Diary plantId={plantId} />
           </Box>
         </Box>
       )}
