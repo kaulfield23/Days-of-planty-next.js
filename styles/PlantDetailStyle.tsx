@@ -6,7 +6,6 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     display: { xl: 'flex' },
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#78b47d',
     color: 'white',
   },
   plantInfo: {
@@ -28,6 +27,7 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     alignItems: 'center',
     margin: '0 auto',
     backgroundColor: '#78b47d',
+    padding: { md: '20px 20px 20px 0px' },
   },
   backParent: {
     position: 'absolute',

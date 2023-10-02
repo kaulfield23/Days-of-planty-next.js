@@ -16,8 +16,7 @@ const Navbar = () => {
     },
   ];
   const [open, setOpen] = useState(false);
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+
   return (
     <Box sx={{ position: 'fixed', right: 0, zIndex: 1 }}>
       <SpeedDial
@@ -28,14 +27,9 @@ const Navbar = () => {
           top: 16,
           right: 16,
         }}
-        onClose={handleClose}
-        onOpen={handleOpen}
-        icon={
-          <LocalFlorist
-            sx={{ color: 'white' }}
-            onClick={() => router.push('/')}
-          />
-        }
+        onClose={() => setOpen(false)}
+        onOpen={() => setOpen(true)}
+        icon={<LocalFlorist sx={{ color: 'white' }} />}
         open={open}
         FabProps={{
           sx: {
@@ -53,7 +47,7 @@ const Navbar = () => {
             icon={action.icon}
             tooltipTitle={action.name}
             tooltipOpen
-            onClick={handleClose}
+            onClick={() => setOpen(false)}
           />
         ))}
       </SpeedDial>
