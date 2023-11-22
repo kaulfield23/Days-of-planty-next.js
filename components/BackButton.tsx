@@ -7,7 +7,7 @@ import { PlantDetailStyle } from 'styles/PlantDetailStyle';
 const BackButton = () => {
   const router = useRouter();
   return (
-    <Box sx={PlantDetailStyle.backParent}>
+    <Box>
       <Fab
         sx={PlantDetailStyle.back}
         size="small"

@@ -8,6 +8,7 @@ import { plantPageStyle } from 'styles/PlantPageStyle';
 import { PlantsTypes } from 'utils/types';
 import { PlantCategoryEnum } from './CategoryIndicator';
 import PlantCard from './PlantCard';
+import PlantyAutocomplete from 'components/PlantyAutocomplete';
 interface PlantTabsProps {
   plants: PlantsTypes[];
 }
@@ -58,6 +59,7 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
           ))}
         </Tabs>
       </Box>
+      <PlantyAutocomplete options={plants} />
       <TabPanel value={value} index={0}>
         <PlantCard plants={plants} />
       </TabPanel>

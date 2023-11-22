@@ -3,10 +3,8 @@ import { SxProps, Theme } from '@mui/material';
 export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
   plantBox: {
     height: '100vh',
-    display: { xl: 'flex' },
-    justifyContent: 'center',
-    alignItems: 'center',
     color: 'white',
+    backgroundColor: '#78b47d',
   },
   plantInfo: {
     backgroundColor: '#78b47d',
@@ -22,21 +20,17 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     maxWidth: '600px',
   },
   logBox: {
+    width: '100%',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center',
     margin: '0 auto',
     backgroundColor: '#78b47d',
     padding: { md: '20px 20px 20px 0px' },
   },
-  backParent: {
-    position: 'absolute',
-  },
   back: {
-    position: 'relative',
     margin: 3,
-    top: { xs: '200px', sm: '200px', md: '200px' },
-    left: { xs: 0, sm: 20, xl: -600 },
+    top: { xs: '200px' },
+    left: { xs: 0, sm: 20, xl: 300 },
     backgroundColor: 'beige',
   },
 };

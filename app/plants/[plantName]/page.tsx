@@ -53,7 +53,7 @@ const PlantDetail = () => {
         <Box
           sx={{
             display: { xl: 'flex' },
-            flexDirection: { xs: 'column', xl: 'row' },
+            flexDirection: { xs: 'column' },
             justifyContent: 'center',
           }}
         >
