@@ -1,4 +1,4 @@
-import Navbar from 'components/features/Navbar';
+import Navbar from 'features/Navbar';
 import { Metadata } from 'next';
 import './globals.css';
 import ProvidersWrapper from './ProvidersWrapper';

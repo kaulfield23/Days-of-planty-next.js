@@ -8,7 +8,7 @@ import { plantPageStyle } from 'styles/PlantPageStyle';
 import { PlantsTypes } from 'utils/types';
 import { PlantCategoryEnum } from './CategoryIndicator';
 import PlantCard from './PlantCard';
-import PlantyAutocomplete from 'components/PlantyAutocomplete';
+import PlantyAutocomplete from './PlantyAutocomplete';
 interface PlantTabsProps {
   plants: PlantsTypes[];
 }
