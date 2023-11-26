@@ -25,7 +25,8 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
   const plantTab = useAppSelector((state) => state.plantsReducer.plantTab ?? 0);
 
   const [value, setValue] = useState(plantTab);
-
+  const [filteredPlants, setFilteredPlants] = useState<string[]>([]);
+  console.log(filteredPlants, ' ???pfilter');
   const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
 
@@ -41,7 +42,7 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
       </div>
     );
   };
-
+  console.log('hey');
   return (
     <Box sx={plantPageStyle.plantTabsBox}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -59,7 +60,12 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
           ))}
         </Tabs>
       </Box>
-      <PlantyAutocomplete options={plants} />
+      <PlantyAutocomplete
+        options={plants}
+        onChange={(filtered) => {
+          setFilteredPlants(filtered);
+        }}
+      />
       <TabPanel value={value} index={0}>
         <PlantCard plants={plants} />
       </TabPanel>
