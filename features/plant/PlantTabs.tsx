@@ -1,7 +1,7 @@
 'use client';
 
-import { Box, Tabs, Tab } from '@mui/material';
 import { useState } from 'react';
+import { Box, Tabs, Tab } from '@mui/material';
 import { updatePlantTab } from 'redux/feature/plantSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { plantPageStyle } from 'styles/PlantPageStyle';
@@ -25,8 +25,7 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
   const plantTab = useAppSelector((state) => state.plantsReducer.plantTab ?? 0);
 
   const [value, setValue] = useState(plantTab);
-  const [filteredPlants, setFilteredPlants] = useState<string[]>([]);
-  console.log(filteredPlants, ' ???pfilter');
+  const [filteredPlants, setFilteredPlants] = useState<PlantsTypes[]>(plants);
   const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
 
@@ -42,7 +41,7 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
       </div>
     );
   };
-  console.log('hey');
+
   return (
     <Box sx={plantPageStyle.plantTabsBox}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
@@ -62,30 +61,30 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
       </Box>
       <PlantyAutocomplete
         options={plants}
-        onChange={(filtered) => {
-          setFilteredPlants(filtered);
-        }}
+        onChange={(filtered) =>
+          setFilteredPlants(filtered.length > 0 ? filtered : plants)
+        }
       />
       <TabPanel value={value} index={0}>
-        <PlantCard plants={plants} />
+        <PlantCard plants={filteredPlants} />
       </TabPanel>
       <TabPanel value={value} index={1}>
         <PlantCard
-          plants={plants.filter(
+          plants={filteredPlants.filter(
             (plant) => plant.category === PlantCategoryEnum.FERN
           )}
         />
       </TabPanel>
       <TabPanel value={value} index={2}>
         <PlantCard
-          plants={plants.filter(
+          plants={filteredPlants.filter(
             (plant) => plant.category === PlantCategoryEnum.TREE
           )}
         />
       </TabPanel>
       <TabPanel value={value} index={3}>
         <PlantCard
-          plants={plants.filter(
+          plants={filteredPlants.filter(
             (plant) => plant.category === PlantCategoryEnum.ETC
           )}
         />
