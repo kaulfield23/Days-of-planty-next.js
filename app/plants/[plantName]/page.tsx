@@ -13,12 +13,12 @@ import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
 import { RemoveCircle } from '@mui/icons-material';
-import PlantCondition from 'components/features/plant/PlantCondition';
-import BackButton from 'components/BackButton';
+import BackButton from 'features/plant/BackButton';
 import { useState } from 'react';
 import { fetchPlants } from 'redux/feature/plantSlice';
-import Diary from 'components/features/plant/diary/Diary';
-import PlantInfoBar from 'components/features/plant/PlantInfoBar';
+import Diary from 'features/diary/Diary';
+import PlantCondition from 'features/plant/PlantCondition';
+import PlantInfoBar from 'features/plant/PlantInfoBar';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);

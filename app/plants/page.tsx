@@ -7,11 +7,11 @@ import plant from '/public/static/img/haejuplant-rv.png';
 import ficus from '/public/static/img/ficus.png';
 import cactus from '/public/static/img/cactus.png';
 import blueStar from '/public/static/img/blueStar.png';
-import PlantAvatar from 'components/features/plant/PlantAvatar';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { fetchPlants } from 'redux/feature/plantSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import PlantTabs from 'components/features/plant/PlantTabs';
+import PlantAvatar from 'features/plant/PlantAvatar';
+import PlantTabs from 'features/plant/PlantTabs';
 
 const Plants = () => {
   const dispatch = useAppDispatch();
