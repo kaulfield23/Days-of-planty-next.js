@@ -5,24 +5,20 @@ import Image from 'next/image';
 import React, { useEffect } from 'react';
 import plant from '/public/static/img/haejuplant-rv.png';
 import { plantPageStyle } from 'styles/PlantPageStyle';
-import { fetchPlants } from 'redux/feature/plantSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import PlantAvatar from 'features/plant/PlantAvatar';
 import PlantTabs from 'features/plant/PlantTabs';
+import usePlants from 'features/plant/hook/usePlants';
 
 const Plants = () => {
-  const dispatch = useAppDispatch();
+  const plants = usePlants();
 
   useEffect(() => {
-    dispatch(fetchPlants());
     const scrollPosition = sessionStorage.getItem('scrollPosition');
     if (scrollPosition) {
       window.scrollTo(0, parseInt(scrollPosition, 10));
       sessionStorage.removeItem('scrollPosition');
     }
-  }, [dispatch]);
-
-  const plants = useAppSelector((state) => state.plantsReducer.plants);
+  }, []);
 
   return (
     <>
