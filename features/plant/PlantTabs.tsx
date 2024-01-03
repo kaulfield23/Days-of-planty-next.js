@@ -1,14 +1,15 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Tabs, Tab } from '@mui/material';
-import { updatePlantTab } from 'redux/feature/plantSlice';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppDispatch } from 'redux/hooks';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { PlantsTypes } from 'utils/types';
 import { PlantCategoryEnum } from './CategoryIndicator';
 import PlantCard from './PlantCard';
 import PlantyAutocomplete from './PlantyAutocomplete';
+import usePlantsMutations from './hook/usePlantsMutation';
+
 interface PlantTabsProps {
   plants: PlantsTypes[];
 }
@@ -21,11 +22,15 @@ interface TabPanelProps {
 }
 
 const PlantTabs = ({ plants }: PlantTabsProps) => {
-  const dispatch = useAppDispatch();
-  const plantTab = useAppSelector((state) => state.plantsReducer.plantTab ?? 0);
+  const { plantTab, updatePlantTabIndex } = usePlantsMutations();
 
   const [value, setValue] = useState(plantTab);
   const [filteredPlants, setFilteredPlants] = useState<PlantsTypes[]>(plants);
+
+  useEffect(() => {
+    setFilteredPlants(plants);
+  }, [plants]);
+
   const TabPanel = (props: TabPanelProps) => {
     const { children, value, index, ...other } = props;
 
@@ -49,7 +54,7 @@ const PlantTabs = ({ plants }: PlantTabsProps) => {
           value={value}
           onChange={(e, value) => {
             setValue(value);
-            dispatch(updatePlantTab(value));
+            updatePlantTabIndex(value);
           }}
           indicatorColor="primary"
           sx={{ borderRight: 1, borderColor: 'divider' }}
