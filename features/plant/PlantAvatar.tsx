@@ -23,7 +23,7 @@ const PlantAvatar = ({ pic, review, name, bgColor }: PlantAvatarProps) => {
       <Box display="flex" alignItems="center">
         <Avatar
           alt="ee"
-          src={pic}
+          src={`/static/img/${pic}.png`}
           sx={{
             width: 100,
             height: 100,

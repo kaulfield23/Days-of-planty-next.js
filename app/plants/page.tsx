@@ -4,9 +4,6 @@ import { Box, CircularProgress, Typography } from '@mui/material';
 import Image from 'next/image';
 import React, { useEffect } from 'react';
 import plant from '/public/static/img/haejuplant-rv.png';
-import ficus from '/public/static/img/ficus.png';
-import cactus from '/public/static/img/cactus.png';
-import blueStar from '/public/static/img/bluestar.png';
 import { plantPageStyle } from 'styles/PlantPageStyle';
 import { fetchPlants } from 'redux/feature/plantSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
@@ -51,19 +48,19 @@ const Plants = () => {
         sx={{ mt: 10 }}
       >
         <PlantAvatar
-          pic={ficus.src}
+          pic={'ficus'}
           review={'This is the best website to keep me sane'}
           name={'Rubber tree'}
           bgColor={'customGreen.main'}
         />
         <PlantAvatar
-          pic={blueStar.src}
+          pic={'bluestar'}
           review={"I thought I wouldn't survive but I'm still alive"}
           name={'Fern'}
           bgColor={'customGrey.main'}
         />
         <PlantAvatar
-          pic={cactus.src}
+          pic={'cactus'}
           review={"I'm lucky that I don't need so much care"}
           name={'Cactus'}
           bgColor={'customYellow.main'}
