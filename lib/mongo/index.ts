@@ -23,6 +23,4 @@ if (process.env.NEXT_PUBLIC_NODE_ENV === 'development') {
   clientPromise = client.connect();
 }
 
-clientPromise = globalWithMongo._mongoClientPromise;
-
 export default clientPromise;
