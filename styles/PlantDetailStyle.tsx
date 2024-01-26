@@ -25,7 +25,6 @@ export const PlantDetailStyle: Record<string, SxProps<Theme> | undefined> = {
     justifyContent: 'center',
     margin: '0 auto',
     backgroundColor: '#78b47d',
-    padding: { md: '20px 20px 20px 0px' },
   },
   back: {
     margin: 3,

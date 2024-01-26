@@ -44,7 +44,7 @@ const Diary = ({ plantId }: DiaryProps) => {
   };
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: '20px' }}>
       {sortedLogs === undefined && (
         <Box width="300px">
           <CircularProgress sx={{ color: 'white' }} />
@@ -54,13 +54,22 @@ const Diary = ({ plantId }: DiaryProps) => {
         <>
           {sortedLogs.length !== 0 && (
             <Box sx={DiaryStyle.diarySection}>
-              <Typography
-                variant="h4"
-                color="customBlack.main"
-                sx={{ textAlign: 'center' }}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  p: 1,
+                }}
               >
-                Log
-              </Typography>
+                <Typography
+                  variant="h4"
+                  color="customBlack.main"
+                  sx={{ marginX: 'auto', pl: '18px' }}
+                >
+                  Logs
+                </Typography>
+                <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
+              </Box>
               <Box sx={DiaryStyle.logBox} ref={logList}>
                 {sortedLogs.map((log, index) => {
                   return (
@@ -97,7 +106,6 @@ const Diary = ({ plantId }: DiaryProps) => {
               </Typography>
             </Box>
           )}
-          <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
         </>
       )}
       {modalOpen && (

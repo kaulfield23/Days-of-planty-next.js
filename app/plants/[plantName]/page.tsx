@@ -3,6 +3,7 @@
 import {
   Box,
   Button,
+  Divider,
   Typography,
   useMediaQuery,
   useTheme,
@@ -12,7 +13,6 @@ import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
-import { RemoveCircle } from '@mui/icons-material';
 import BackButton from 'features/plant/BackButton';
 import { useState } from 'react';
 import { fetchPlants } from 'redux/feature/plantSlice';
@@ -65,45 +65,56 @@ const PlantDetail = () => {
               height={isMobileSize ? 400 : 500}
               alt={plant.name}
             />
-            <Box display="flex" justifyContent="center" alignItems="end">
-              <Typography
-                variant="h4"
+            <Typography variant="h4">{plant.name}</Typography>
+            <Box
+              display="flex"
+              sx={{
+                backgroundColor: onEditMode ? '#f5f5f5' : 'transparent',
+                p: '10px 15px 10px 15px',
+                borderRadius: '5px',
+              }}
+            >
+              {onEditMode && (
+                <Box
+                  sx={{
+                    display: 'flex',
+                  }}
+                >
+                  <Zoom in={true}>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      size="small"
+                      onClick={() => handleCondition(-1)}
+                      sx={{
+                        backgroundColor: '#f35858',
+                        color: 'white',
+                        mr: 2,
+                      }}
+                    >
+                      Dead
+                    </Button>
+                  </Zoom>
+                  <Divider orientation="vertical" flexItem />
+                </Box>
+              )}
+              <Box
                 sx={{
                   fontSize: { xs: '25px', sm: '30px' },
                   maxWidth: { xs: '250px', sm: '500px' },
                   textTransform: 'capitalize',
                   transition: 'margin-left 0.4s ease-in-out',
-                  marginLeft: onEditMode ? '-20px' : '0',
+                  marginLeft: onEditMode ? '10px' : '0',
                 }}
               >
-                {plant.name}
-              </Typography>
-              {onEditMode && (
-                <Zoom in={true}>
-                  <Button
-                    variant="contained"
-                    color="error"
-                    size="small"
-                    onClick={() => handleCondition(-1)}
-                    sx={{
-                      ml: 2,
-                      mb: 0.8,
-                      backgroundColor: '#f35858',
-                      color: 'white',
-                    }}
-                    endIcon={<RemoveCircle />}
-                  >
-                    Dead
-                  </Button>
-                </Zoom>
-              )}
+                <PlantCondition
+                  condition={plant.condition}
+                  maxNum={5}
+                  onClickEdit={(value) => setOnEditMode(value)}
+                  onClickHeart={(value) => handleCondition(value)}
+                />
+              </Box>
             </Box>
-            <PlantCondition
-              condition={plant.condition}
-              maxNum={5}
-              onClickEdit={(value) => setOnEditMode(value)}
-              onClickHeart={(value) => handleCondition(value)}
-            />
             <Typography
               variant="h6"
               sx={{ textTransform: 'capitalize', pt: 1 }}
