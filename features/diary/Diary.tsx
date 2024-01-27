@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Divider, Typography } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
@@ -75,7 +75,7 @@ const Diary = ({ plantId }: DiaryProps) => {
                   return (
                     <Box
                       sx={{
-                        mb: 4,
+                        mb: 1,
                         '&:hover': {
                           bgcolor: '#6d616127',
                         },
@@ -91,6 +91,7 @@ const Diary = ({ plantId }: DiaryProps) => {
                         </Typography>
                       </Box>
                       <Typography variant="body1">{log.content}</Typography>
+                      <Divider sx={{ mt: 2 }} />
                     </Box>
                   );
                 })}
