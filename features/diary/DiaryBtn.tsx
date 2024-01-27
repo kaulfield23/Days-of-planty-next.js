@@ -12,6 +12,9 @@ const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
         sx={{
           color: '#459acf',
           fontSize: '37px',
+          cursor: 'pointer',
+          backgroundColor: '#f0f08d',
+          borderRadius: '5px',
         }}
         onClick={onClickWriteDiary}
       />
