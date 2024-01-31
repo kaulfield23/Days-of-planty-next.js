@@ -9,7 +9,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
 import { Delete, InfoOutlined } from '@mui/icons-material';
-import DiaryBtn from './DiaryBtn';
+import AddBtn from './AddBtn';
 import DiaryFormModal from './DiaryFormModal';
 
 interface DiaryProps {
@@ -87,7 +87,7 @@ const Diary = ({ plantId }: DiaryProps) => {
                 >
                   Logs
                 </Typography>
-                <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
+                <AddBtn onClickWriteDiary={() => setModalOpen(true)} />
               </Box>
               <Box sx={DiaryStyle.logBox} ref={logList}>
                 {sortedLogs.map((log, index) => {
@@ -130,6 +130,28 @@ const Diary = ({ plantId }: DiaryProps) => {
               <Typography variant="h5">
                 No logs to display. Please write a diary about this plant
               </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  borderRadius: '10px',
+                  p: 1,
+                  mt: 2,
+                  backgroundColor: '#f0f08d',
+                  color: '#459acf',
+                  cursor: 'pointer',
+                }}
+                onClick={() => setModalOpen(true)}
+              >
+                <Typography
+                  sx={{
+                    fontWeight: 'bold',
+                    fontSize: '25px',
+                  }}
+                >
+                  Add
+                </Typography>
+              </Box>
             </Box>
           )}
         </>

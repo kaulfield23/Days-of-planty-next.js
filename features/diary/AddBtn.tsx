@@ -5,7 +5,7 @@ interface DiaryBtnProps {
   onClickWriteDiary: () => void;
 }
 
-const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
+const AddBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
   return (
     <Tooltip title="Add a log">
       <Add
@@ -22,4 +22,4 @@ const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
   );
 };
 
-export default DiaryBtn;
+export default AddBtn;
