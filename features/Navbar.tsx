@@ -28,7 +28,7 @@ const Navbar = () => {
           right: 16,
         }}
         onClose={() => setOpen(false)}
-        onOpen={() => setOpen(true)}
+        onClick={() => setOpen(true)}
         icon={<LocalFlorist sx={{ color: 'white' }} />}
         open={open}
         FabProps={{
@@ -39,7 +39,6 @@ const Navbar = () => {
             },
           },
         }}
-        // onClick={() => router.push('/')}
       >
         {actions.map((action) => (
           <SpeedDialAction

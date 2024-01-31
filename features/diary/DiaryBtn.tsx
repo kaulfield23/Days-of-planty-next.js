@@ -1,5 +1,5 @@
-import { Button, Box } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
+import { Add } from '@mui/icons-material';
+import { Tooltip } from '@mui/material';
 
 interface DiaryBtnProps {
   onClickWriteDiary: () => void;
@@ -7,28 +7,18 @@ interface DiaryBtnProps {
 
 const DiaryBtn = ({ onClickWriteDiary }: DiaryBtnProps) => {
   return (
-    <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        mt: { xl: -6 },
-        mb: 2,
-      }}
-    >
-      <Button
-        type="submit"
-        variant="contained"
-        startIcon={<AddIcon />}
+    <Tooltip title="Add a log">
+      <Add
         sx={{
-          marginTop: 0.5,
-          color: 'white',
-          fontWeight: 'bold',
+          color: '#459acf',
+          fontSize: '37px',
+          cursor: 'pointer',
+          backgroundColor: '#f0f08d',
+          borderRadius: '5px',
         }}
         onClick={onClickWriteDiary}
-      >
-        Write diary
-      </Button>
-    </Box>
+      />
+    </Tooltip>
   );
 };
 

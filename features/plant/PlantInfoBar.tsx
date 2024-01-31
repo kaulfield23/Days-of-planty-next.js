@@ -28,24 +28,28 @@ const PlantInfoBar = ({
     <Box display="flex" justifyContent="center" sx={{ mt: 2 }}>
       <Box display="flex" justifyContent="space-around">
         <Box display="flex" flexDirection="column">
-          <Box display="flex" alignItems="center" sx={{ mb: 0.8 }}>
-            <WaterDrop
-              sx={{
-                color: '#a7d1f8',
-                fontSize: { xs: '20px', sm: '30px' },
-              }}
-            />
-            <PlantCareScale input={water} maxNum={5} color={'#a7d1f8'} />
-          </Box>
-          <Box display="flex" alignItems="center">
-            <WbSunny
-              sx={{
-                color: '#ffc548',
-                fontSize: { xs: '20px', sm: '30px' },
-              }}
-            />
-            <PlantCareScale input={sun} maxNum={5} color={'#ffc548'} />
-          </Box>
+          <Tooltip title="Watering requirements">
+            <Box display="flex" alignItems="center" sx={{ mb: 0.8 }}>
+              <WaterDrop
+                sx={{
+                  color: '#a7d1f8',
+                  fontSize: { xs: '20px', sm: '30px' },
+                }}
+              />
+              <PlantCareScale input={water} maxNum={5} color={'#a7d1f8'} />
+            </Box>
+          </Tooltip>
+          <Tooltip title="Light requirements">
+            <Box display="flex" alignItems="center">
+              <WbSunny
+                sx={{
+                  color: '#ffc548',
+                  fontSize: { xs: '20px', sm: '30px' },
+                }}
+              />
+              <PlantCareScale input={sun} maxNum={5} color={'#ffc548'} />
+            </Box>
+          </Tooltip>
         </Box>
         <Divider
           orientation="vertical"
@@ -60,7 +64,7 @@ const PlantInfoBar = ({
             text={category}
             padding={1}
           />
-          <Tooltip title={flower ? 'Flowering plant' : 'No flower'}>
+          <Tooltip title={flower ? 'Flowering plant' : 'Flowerless plant'}>
             {flower ? (
               <LocalFloristOutlined
                 sx={{

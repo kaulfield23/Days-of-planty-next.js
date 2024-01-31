@@ -78,7 +78,7 @@ const PlantCondition = ({
         }}
       >
         <Box display="flex" alignItems="center">
-          <Tooltip title="Edit">
+          <Tooltip title="Edit plant's condition">
             <ModeEdit
               sx={{
                 cursor: 'pointer',

@@ -3,8 +3,7 @@
 import { ThemeProvider } from '@mui/material';
 import { theme } from 'styles/theme';
 import { Provider as ReduxProvider } from 'react-redux';
-import { persistor, store } from 'redux/store';
-import { PersistGate } from 'redux-persist/integration/react';
+import { store } from 'redux/store';
 
 export default function ProvidersWrapper({
   children,
@@ -13,9 +12,7 @@ export default function ProvidersWrapper({
 }) {
   return (
     <ReduxProvider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <ThemeProvider theme={theme}>{children}</ThemeProvider>
-      </PersistGate>
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
     </ReduxProvider>
   );
 }

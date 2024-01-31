@@ -1,4 +1,4 @@
-import { Box, CircularProgress, Typography } from '@mui/material';
+import { Box, CircularProgress, Divider, Typography } from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
@@ -44,9 +44,9 @@ const Diary = ({ plantId }: DiaryProps) => {
   };
 
   return (
-    <Box>
+    <Box sx={{ marginBottom: '20px' }}>
       {sortedLogs === undefined && (
-        <Box width="300px">
+        <Box width="300px" display="flex" justifyContent="center">
           <CircularProgress sx={{ color: 'white' }} />
         </Box>
       )}
@@ -54,19 +54,28 @@ const Diary = ({ plantId }: DiaryProps) => {
         <>
           {sortedLogs.length !== 0 && (
             <Box sx={DiaryStyle.diarySection}>
-              <Typography
-                variant="h4"
-                color="customBlack.main"
-                sx={{ textAlign: 'center' }}
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  p: 1,
+                }}
               >
-                Log
-              </Typography>
+                <Typography
+                  variant="h4"
+                  color="customBlack.main"
+                  sx={{ marginX: 'auto', pl: '18px' }}
+                >
+                  Logs
+                </Typography>
+                <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
+              </Box>
               <Box sx={DiaryStyle.logBox} ref={logList}>
                 {sortedLogs.map((log, index) => {
                   return (
                     <Box
                       sx={{
-                        mb: 4,
+                        mb: 1,
                         '&:hover': {
                           bgcolor: '#6d616127',
                         },
@@ -82,6 +91,7 @@ const Diary = ({ plantId }: DiaryProps) => {
                         </Typography>
                       </Box>
                       <Typography variant="body1">{log.content}</Typography>
+                      <Divider sx={{ mt: 2 }} />
                     </Box>
                   );
                 })}
@@ -97,7 +107,6 @@ const Diary = ({ plantId }: DiaryProps) => {
               </Typography>
             </Box>
           )}
-          <DiaryBtn onClickWriteDiary={() => setModalOpen(true)} />
         </>
       )}
       {modalOpen && (
