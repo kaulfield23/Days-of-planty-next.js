@@ -1,8 +1,14 @@
-import { Box, CircularProgress, Divider, Typography } from '@mui/material';
+import {
+  Box,
+  CircularProgress,
+  Divider,
+  IconButton,
+  Typography,
+} from '@mui/material';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { DiaryStyle } from 'styles/DiaryStyle';
 import { DiaryTypes } from 'utils/types';
-import { InfoOutlined } from '@mui/icons-material';
+import { Delete, InfoOutlined } from '@mui/icons-material';
 import DiaryBtn from './DiaryBtn';
 import DiaryFormModal from './DiaryFormModal';
 
@@ -86,16 +92,20 @@ const Diary = ({ plantId }: DiaryProps) => {
                     >
                       <Box sx={DiaryStyle.titleDate}>
                         <Typography variant="h6">Title : {log.name}</Typography>
-                        <Typography variant="h6">
-                          {log.date.toISOString().split('T')[0]}
-                        </Typography>
+                        <Box display="flex" alignItems="center">
+                          <Typography variant="h6" sx={{ mr: 0.2 }}>
+                            {log.date.toISOString().split('T')[0]}
+                          </Typography>
+                          <IconButton>
+                            <Delete color="error" />
+                          </IconButton>
+                        </Box>
                       </Box>
                       <Typography variant="body1">{log.content}</Typography>
                       <Divider sx={{ mt: 2 }} />
                     </Box>
                   );
                 })}
-                <Typography variant="h2"></Typography>
               </Box>
             </Box>
           )}

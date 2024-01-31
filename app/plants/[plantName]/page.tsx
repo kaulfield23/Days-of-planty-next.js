@@ -9,13 +9,12 @@ import {
   useTheme,
   Zoom,
 } from '@mui/material';
-import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import { useAppSelector } from 'redux/hooks';
 import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { PlantDetailStyle } from 'styles/PlantDetailStyle';
 import BackButton from 'features/plant/BackButton';
 import { useState } from 'react';
-import { fetchPlants } from 'redux/feature/plantSlice';
 import Diary from 'features/diary/Diary';
 import PlantCondition from 'features/plant/PlantCondition';
 import PlantInfoBar from 'features/plant/PlantInfoBar';
@@ -23,7 +22,6 @@ import PlantInfoBar from 'features/plant/PlantInfoBar';
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
   const [plantCondition, setPlantCondition] = useState<null | number>(null);
-  const dispatch = useAppDispatch();
   const plants = useAppSelector((state) => state.plantsReducer.plants);
   const plantId = useSearchParams().get('plantId');
   const plant = plants.find((item) => item._id === plantId);
