@@ -1,5 +1,6 @@
 import clientPromise from 'lib/mongo';
 import { plantDiary } from 'lib/mongo/models';
+import { ObjectId } from 'mongodb';
 import { NextRequest } from 'next/server';
 
 export async function POST(request: Request) {
@@ -30,6 +31,21 @@ export async function GET(request: NextRequest) {
       .collection('diary')
       .find({ plantId: plantId })
       .toArray();
+    return new Response(JSON.stringify(result));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  const client = await clientPromise;
+  const db = client.db('planty');
+  const logId = await request.json();
+
+  try {
+    const result = await db
+      .collection('diary')
+      .deleteOne({ _id: new ObjectId(logId) });
     return new Response(JSON.stringify(result));
   } catch (e) {
     console.log(e);

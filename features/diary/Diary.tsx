@@ -49,6 +49,19 @@ const Diary = ({ plantId }: DiaryProps) => {
     logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleDelete = (logId: string) => {
+    fetch(`/api/diary`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(logId),
+    }).then((res) => {
+      if (res.status === 200) {
+        fetchData();
+      }
+    });
+    console.log(logId);
+  };
+
   return (
     <Box sx={{ marginBottom: '20px' }}>
       {sortedLogs === undefined && (
@@ -96,7 +109,9 @@ const Diary = ({ plantId }: DiaryProps) => {
                           <Typography variant="h6" sx={{ mr: 0.2 }}>
                             {log.date.toISOString().split('T')[0]}
                           </Typography>
-                          <IconButton>
+                          <IconButton
+                            onClick={() => handleDelete(log._id.toString())}
+                          >
                             <Delete color="error" />
                           </IconButton>
                         </Box>
