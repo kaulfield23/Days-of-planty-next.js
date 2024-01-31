@@ -22,6 +22,7 @@ import PlantInfoBar from 'features/plant/PlantInfoBar';
 
 const PlantDetail = () => {
   const [onEditMode, setOnEditMode] = useState(false);
+  const [plantCondition, setPlantCondition] = useState<null | number>(null);
   const dispatch = useAppDispatch();
   const plants = useAppSelector((state) => state.plantsReducer.plants);
   const plantId = useSearchParams().get('plantId');
@@ -32,6 +33,7 @@ const PlantDetail = () => {
 
   const handleCondition = (index: number) => {
     if (onEditMode) {
+      setPlantCondition(index + 1);
       const newValue = { plantId: plantId, newCondition: index + 1 };
       fetch(`/api/plants`, {
         method: 'PATCH',
@@ -39,10 +41,6 @@ const PlantDetail = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(newValue),
-      }).then((res) => {
-        if (res.status === 200) {
-          dispatch(fetchPlants());
-        }
       });
     }
   };
@@ -108,7 +106,7 @@ const PlantDetail = () => {
                 }}
               >
                 <PlantCondition
-                  condition={plant.condition}
+                  condition={plantCondition ?? plant.condition}
                   maxNum={5}
                   onClickEdit={(value) => setOnEditMode(value)}
                   onClickHeart={(value) => handleCondition(value)}
