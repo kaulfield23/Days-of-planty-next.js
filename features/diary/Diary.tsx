@@ -11,6 +11,7 @@ import { DiaryTypes } from 'utils/types';
 import { Delete, InfoOutlined } from '@mui/icons-material';
 import AddBtn from './AddBtn';
 import DiaryFormModal from './DiaryFormModal';
+import Confirmation from 'features/Confirmation';
 
 interface DiaryProps {
   plantId: string | null;
@@ -19,6 +20,7 @@ interface DiaryProps {
 const Diary = ({ plantId }: DiaryProps) => {
   const [logs, setLogs] = useState<DiaryTypes[]>();
   const [modalOpen, setModalOpen] = useState(false);
+  const [logId, setLogId] = useState<string | null>(null);
   const logList = useRef<null | HTMLDivElement>(null);
 
   const fetchData = useCallback(async () => {
@@ -49,7 +51,8 @@ const Diary = ({ plantId }: DiaryProps) => {
     logList?.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleDelete = (logId: string) => {
+  const handleDelete = () => {
+    setLogId(null);
     fetch(`/api/diary`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -59,7 +62,6 @@ const Diary = ({ plantId }: DiaryProps) => {
         fetchData();
       }
     });
-    console.log(logId);
   };
 
   return (
@@ -110,7 +112,9 @@ const Diary = ({ plantId }: DiaryProps) => {
                             {log.date.toISOString().split('T')[0]}
                           </Typography>
                           <IconButton
-                            onClick={() => handleDelete(log._id.toString())}
+                            onClick={() => {
+                              setLogId(log._id.toString());
+                            }}
                           >
                             <Delete color="error" />
                           </IconButton>
@@ -164,6 +168,13 @@ const Diary = ({ plantId }: DiaryProps) => {
             fetchData();
             scrollUp();
           }}
+        />
+      )}
+      {logId && (
+        <Confirmation
+          open={logId}
+          onClickClose={() => setLogId(null)}
+          onConfirm={handleDelete}
         />
       )}
     </Box>

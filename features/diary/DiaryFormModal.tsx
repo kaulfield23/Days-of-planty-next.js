@@ -6,19 +6,19 @@ interface DiaryModalProps {
   onDataAdd: () => void;
 }
 
+export const modalStyle = {
+  position: 'absolute' as 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '80%',
+  maxWidth: '700px',
+  bgcolor: '#968282',
+  padding: '50px 10px',
+  minHeight: '300px',
+  borderRadius: '6px',
+};
 const DiaryFormModal = ({ open, onClickClose, onDataAdd }: DiaryModalProps) => {
-  const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '80%',
-    maxWidth: '700px',
-    bgcolor: '#968282',
-    padding: '50px 10px',
-    minHeight: '300px',
-  };
-
   return (
     <Modal
       open={open}
@@ -26,7 +26,7 @@ const DiaryFormModal = ({ open, onClickClose, onDataAdd }: DiaryModalProps) => {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      <Box sx={style}>
+      <Box sx={modalStyle}>
         <DiaryForm onClickClose={onClickClose} onDataAdd={onDataAdd} />
       </Box>
     </Modal>
